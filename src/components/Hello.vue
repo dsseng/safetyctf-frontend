@@ -93,7 +93,7 @@ export default {
           targets: vm,
           usersTotal: usersAndTasks.usersCount,
           tasksTotal: usersAndTasks.tasksCount,
-          duration: 3000,
+          duration: 1000,
           easing: 'linear'
         })
       } else {
