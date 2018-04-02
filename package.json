@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "SafetyCTF frontend",
   "author": "sh7dm",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
@@ -13,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "animejs": "^2.2.0",
     "axios": "^0.18.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
