@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- <header>
-      <span>⚡️SafetyCTF👨‍💻👩‍💻</span>
-    </header> -->
     <router-view></router-view>
   </div>
 </template>

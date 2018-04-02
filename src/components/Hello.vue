@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import anime from 'animejs'
+
 export default {
   name: 'hello',
   data () {
@@ -84,8 +86,16 @@ export default {
       let usersAndTasks = await (await fetch(this.$apiRoot + 'info/usersAndTasks')).json()
 
       if (usersAndTasks.code === 200) {
-        this.usersTotal = usersAndTasks.usersCount
-        this.tasksTotal = usersAndTasks.tasksCount
+        /* this.usersTotal = usersAndTasks.usersCount
+        this.tasksTotal = usersAndTasks.tasksCount */
+        let vm = this
+        anime({
+          targets: vm,
+          usersTotal: usersAndTasks.usersCount,
+          tasksTotal: usersAndTasks.tasksCount,
+          duration: 3000,
+          easing: 'linear'
+        })
       } else {
         console.log(usersAndTasks)
         this.connErr = true
