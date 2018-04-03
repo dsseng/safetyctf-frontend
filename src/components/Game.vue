@@ -43,14 +43,29 @@ export default {
       dark: false
     }
   },
-  created () {
+  mounted () {
     this.$router.push('/game/myaccount')
     this.dark = this.$ls.get('dark') || false
+
+    let vm = this
+    this.$el.onclick = function () {
+      vm.refreshToken()
+    }
   },
   methods: {
     switchDark () {
       this.dark = !this.dark
       this.$ls.set('dark', this.dark) // Save to localStorage
+    },
+    async refreshToken () {
+      if (this.$getTokenExp()) {
+        let result = await this.$http.post(this.$apiRoot + 'auth/refreshToken', { token: this.$getToken() })
+
+        if (result.data.code === 200) {
+          this.$ls.set('token', result.data.token, 60)
+          this.$ls.set('token-exp', 1, 55)
+        }
+      }
     }
   }
 }

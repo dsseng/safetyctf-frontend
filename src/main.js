@@ -15,13 +15,16 @@ Vue.prototype.$ls = lscache
 Vue.prototype.$getToken = () => {
   return lscache.get('token')
 }
+Vue.prototype.$getAuth = () => {
+  return lscache.get('token') != null
+}
 Vue.prototype.$getTokenExp = () => {
-  return lscache.get('token-exp')
+  return lscache.get('token-exp') == null
 }
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+window.vm /* For easy console access */ = new Vue({
   el: '#app',
   router,
   template: '<App/>',
