@@ -12,6 +12,12 @@ Vue.use(Vuetify)
 Vue.prototype.$http = axios
 Vue.prototype.$apiRoot = 'http://localhost:3000/api/' // modify this, if you have api server at another address
 Vue.prototype.$ls = lscache
+Vue.prototype.$getToken = () => {
+  return lscache.get('token')
+}
+Vue.prototype.$getTokenExp = () => {
+  return lscache.get('token-exp')
+}
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
