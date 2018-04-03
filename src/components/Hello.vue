@@ -83,21 +83,21 @@ export default {
   },
   async created () {
     try {
-      let usersAndTasks = await (await fetch(this.$apiRoot + 'info/usersAndTasks')).json()
+      let usersAndTasks = await this.$http.get(this.$apiRoot + 'info/usersAndTasks')
 
-      if (usersAndTasks.code === 200) {
-        /* this.usersTotal = usersAndTasks.usersCount
-        this.tasksTotal = usersAndTasks.tasksCount */
+      if (usersAndTasks.data.code === 200) {
+        /* this.usersTotal = usersAndTasks.data.usersCount
+        this.tasksTotal = usersAndTasks.data.tasksCount */
         let vm = this
         anime({
           targets: vm,
-          usersTotal: usersAndTasks.usersCount,
-          tasksTotal: usersAndTasks.tasksCount,
+          usersTotal: usersAndTasks.data.usersCount,
+          tasksTotal: usersAndTasks.data.tasksCount,
           duration: 1000,
           easing: 'linear'
         })
       } else {
-        console.log(usersAndTasks)
+        console.log(usersAndTasks.data)
         this.connErr = true
       }
     } catch (err) {
@@ -107,7 +107,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

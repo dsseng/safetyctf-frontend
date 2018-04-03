@@ -15,6 +15,14 @@
     >
       Home page
     </v-btn>
+    <v-btn
+      class="blue lighten-2 mt-5"
+      dark
+      large
+      @click="$router.go(-1)"
+    >
+      Go back
+    </v-btn>
   </v-layout>
 </template>
 
@@ -23,7 +31,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>
