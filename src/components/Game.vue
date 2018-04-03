@@ -6,6 +6,7 @@
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat to="/"><v-icon>home</v-icon>Home</v-btn>
       <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? 'Dark' : 'Light' }} theme</v-btn>
+      <v-btn flat @click="logout"><v-icon>exit_to_app</v-icon>Log out</v-btn>
     </v-toolbar-items>
   </v-toolbar>
   <v-navigation-drawer fixed app>
@@ -66,6 +67,10 @@ export default {
           this.$ls.set('token-exp', 1, 55)
         }
       }
+    },
+    logout () {
+      this.$ls.remove('token')
+      this.$ls.remove('token-exp')
     }
   }
 }
