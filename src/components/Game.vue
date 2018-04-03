@@ -21,7 +21,7 @@
     </v-toolbar>
     <v-divider></v-divider>
     <v-list dense class="pt-0">
-      <v-list-tile to="/game/auth">
+      <v-list-tile to="/game/myaccount">
         <v-list-tile-action>
           <v-icon>fingerprint</v-icon>
         </v-list-tile-action>
