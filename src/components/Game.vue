@@ -6,7 +6,7 @@
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat to="/"><v-icon>home</v-icon>Home</v-btn>
       <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? 'Dark' : 'Light' }} theme</v-btn>
-      <v-btn flat @click="logout"><v-icon>exit_to_app</v-icon>Log out</v-btn>
+      <v-btn flat @click="logout" v-if="this.auth"><v-icon>exit_to_app</v-icon>Log out</v-btn>
     </v-toolbar-items>
   </v-toolbar>
   <v-navigation-drawer fixed app>
@@ -41,7 +41,8 @@
 export default {
   data () {
     return {
-      dark: false
+      dark: false,
+      auth: false
     }
   },
   mounted () {
@@ -52,6 +53,10 @@ export default {
     this.$el.onclick = function () {
       vm.refreshToken()
     }
+
+    setInterval(() => {
+      vm.auth = vm.$getAuth()
+    }, 50)
   },
   methods: {
     switchDark () {
