@@ -87,6 +87,7 @@ export default {
           this.$v.$reset()
 
           this.flag = ''
+          this.solved = true
 
           this.err = false
           this.inc = false
