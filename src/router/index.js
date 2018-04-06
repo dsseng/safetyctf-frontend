@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import NotFound from '@/components/NotFound'
 import Game from '@/components/Game'
 import MyAccount from '@/components/Game/MyAccount'
+import Tasks from '@/components/Game/Tasks'
 
 Vue.use(Router)
 
@@ -17,6 +18,10 @@ export default new Router({
         {
           path: 'MyAccount',
           component: MyAccount
+        },
+        {
+          path: 'Tasks',
+          component: Tasks
         }
       ]
     },
