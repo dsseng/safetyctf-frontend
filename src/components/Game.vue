@@ -54,7 +54,9 @@ export default {
     }
   },
   mounted () {
-    this.$router.push('/game/myaccount')
+    if (!this.$getAuth()) {
+      this.$router.push('/game/myaccount')
+    }
     this.dark = this.$ls.get('dark') || false
 
     let vm = this
