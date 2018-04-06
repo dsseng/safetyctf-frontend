@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-layout column align-center justify-center>
+  <v-container>
     <div v-if="!this.auth">
       <h1>Log in</h1>
       <login-form></login-form>
@@ -12,7 +12,7 @@
       <h1>Change password</h1>
       <password-changing-form></password-changing-form>
     </div>
-  </v-layout>
+  </v-container>
 </div>
 </template>
 
