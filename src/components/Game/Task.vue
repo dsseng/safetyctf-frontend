@@ -15,9 +15,7 @@
   <p>
     Solved by (latest 10):
     <ul>
-      <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un">
-        {{ un }}
-      </li>
+      <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">{{ un }}</router-link></li>
     </ul>
   </p>
   <form v-if="!solved">
