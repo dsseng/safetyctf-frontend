@@ -6,6 +6,7 @@ import axios from 'axios'
 import lscache from 'lscache'
 import App from './App'
 import router from './router'
+import i18n from './i18n'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
@@ -27,6 +28,7 @@ Vue.config.productionTip = false
 window.vm /* For easy console access */ = new Vue({
   el: '#app',
   router,
+  i18n,
   template: '<App/>',
   components: { App }
 })

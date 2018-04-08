@@ -21,7 +21,7 @@
   </p>
   <p>Solved tasks:</p>
   <v-layout row justify-space-around>
-    <task v-for="task in tasks" :key="task.id" :task="task"></task>
+    <task v-for="task in tasksSolved" :key="task.id" :task="task"></task>
   </v-layout>
 </div>
 </template>
@@ -36,14 +36,15 @@ export default {
       user: {},
       err: false,
       nf: false,
-      tasks: []
+      tasksSolved: []
     }
   },
   props: [ 'username' ],
   async created () {
     try {
-      console.log(this.username)
       let result = await this.$http.get(this.$apiRoot + 'auth/' + this.username + '/info')
+
+      console.log(result.data)
 
       if (result.data.code === 200) {
         if (!result.data.user) {
@@ -54,6 +55,7 @@ export default {
           this.err = false
 
           this.user = result.data.user
+          this.tasksSolved = result.data.tasksSolved
         }
       } else {
         this.err = true
@@ -68,8 +70,9 @@ export default {
   watch: {
     async username () {
       try {
-        console.log(this.username)
         let result = await this.$http.get(this.$apiRoot + 'auth/' + this.username + '/info')
+
+        console.log(result.data)
 
         if (result.data.code === 200) {
           if (!result.data.user) {
@@ -80,6 +83,7 @@ export default {
             this.err = false
 
             this.user = result.data.user
+            this.tasksSolved = result.data.tasksSolved
           }
         } else {
           this.err = true
@@ -90,25 +94,6 @@ export default {
         this.err = true
         this.nf = false
       }
-    },
-    user () {
-      this.tasks = []
-
-      this.user.tasksSolved.forEach(async t => {
-        try {
-          let result = await this.$http.get(this.$apiRoot + 'tasks/' + t)
-
-          if (result.data.code === 200) {
-            this.err = false
-            this.tasks.push(result.data.task)
-          } else {
-            this.err = true
-          }
-        } catch (err) {
-          console.error(err)
-          this.err = true
-        }
-      })
     }
   }
 }

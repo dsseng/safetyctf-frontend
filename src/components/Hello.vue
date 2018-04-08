@@ -1,5 +1,15 @@
 <template>
   <v-app>
+    {{ $t("message.hello") }}
+
+    <v-toolbar>
+      <v-toolbar-title>⚡️SafetyCTF👨‍💻👩‍💻</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat to="/"><v-icon>home</v-icon>Home</v-btn>
+        <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? 'Dark' : 'Light' }} theme</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
     <v-alert color="error" icon="signal_cellular_connected_no_internet_4_bar" :value="connErr" transition="scale-transition">
       It seems to be some connection problems
     </v-alert>
@@ -84,6 +94,20 @@ import anime from 'animejs'
 
 export default {
   name: 'hello',
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          hello: 'hello world'
+        }
+      },
+      ja: {
+        message: {
+          hello: 'こんにちは、世界'
+        }
+      }
+    }
+  },
   data () {
     return {
       tasksTotal: 0,
