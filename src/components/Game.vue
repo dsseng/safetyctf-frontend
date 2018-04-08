@@ -6,6 +6,7 @@
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat to="/"><v-icon>home</v-icon>Home</v-btn>
       <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? 'Dark' : 'Light' }} theme</v-btn>
+      <lang-switch></lang-switch>
       <v-btn flat @click="logout" v-if="this.auth"><v-icon>exit_to_app</v-icon>Log out</v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -46,7 +47,10 @@
 </template>
 
 <script>
+import LangSwitch from './Game/LangSwitch'
+
 export default {
+  components: { LangSwitch },
   data () {
     return {
       dark: false,
