@@ -11,7 +11,7 @@
         class="yellow--text"
       >
         <h1 class="yellow--text mb-2 display-1 text-xs-center">⚡️Welcome to SafetyCTF!👨‍💻👩‍💻</h1>
-        <div class="subheading mb-3 text-xs-center">Hello, this is competition in hacking and IT safety🔒🔓</div>
+        <div class="subheading mb-3 text-xs-center">Hello, this is a competition in hacking and IT safety🔒🔓</div>
         <v-btn
           class="blue lighten-2 mt-5"
           dark
@@ -66,6 +66,16 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <section>
+      <v-container>
+        <p>
+          SafetyCTF is a competition in hacking‍ 💻 and IT safety 🔒🔓. CTF is "Capture The Flag". You need to solve tasks 📜 to get flags, codes starting with $ctf.
+        </p>
+        <p>
+          If you have solved task, you will get money 💵 and experience ✨.
+        </p>
+      </v-container>
+    </section>
   </v-app>
 </template>
 
