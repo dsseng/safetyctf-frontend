@@ -5,6 +5,7 @@ import NotFound from '@/components/NotFound'
 import Game from '@/components/Game'
 import MyAccount from '@/components/Game/MyAccount'
 import Tasks from '@/components/Game/Tasks'
+import UserView from '@/components/Game/UserView'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
         {
           path: 'Tasks',
           component: Tasks
+        },
+        {
+          path: 'User/:username',
+          name: 'UserView',
+          component: UserView
         }
       ]
     },
