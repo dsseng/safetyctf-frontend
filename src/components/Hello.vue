@@ -147,15 +147,14 @@ export default {
       let usersAndTasks = await this.$http.get(this.$apiRoot + 'info/usersAndTasks')
 
       if (usersAndTasks.data.code === 200) {
-        /* this.usersTotal = usersAndTasks.data.usersCount
-        this.tasksTotal = usersAndTasks.data.tasksCount */
         let vm = this
         anime({
           targets: vm,
           usersTotal: usersAndTasks.data.usersCount,
           tasksTotal: usersAndTasks.data.tasksCount,
           duration: 1000,
-          easing: 'linear'
+          easing: 'linear',
+          round: 1
         })
       } else {
         console.log(usersAndTasks.data)
