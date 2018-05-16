@@ -78,7 +78,7 @@ export default {
       this.$ls.set('dark', this.dark) // Save to localStorage
     },
     async refreshToken () {
-      if (this.$getTokenExp()) {
+      if (this.$getTokenExp() && this.$getToken()) {
         let result = await this.$http.post(this.$apiRoot + 'auth/refreshToken', { token: this.$getToken() })
 
         if (result.data.code === 200) {
