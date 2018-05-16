@@ -105,7 +105,7 @@
         const errors = []
         if (!this.$v.cPassword.$dirty) return errors
         !this.$v.cPassword.required && errors.push('Password confirmation is required')
-        !this.$v.cPassword.sameAsPassword && errors.push('Passwords not match')
+        !this.$v.cPassword.sameAsPassword && errors.push('Passwords does not match')
         return errors
       },
       nameErrors () {
@@ -146,6 +146,7 @@
         } else {
           console.error(result.data)
           this.err = true
+          this.submit()
         }
       },
       clear () {
