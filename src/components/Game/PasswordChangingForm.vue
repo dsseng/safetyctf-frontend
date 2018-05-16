@@ -90,7 +90,7 @@
         const errors = []
         if (!this.$v.confirmPassword.$dirty) return errors
         !this.$v.confirmPassword.required && errors.push('Password confirmation is required')
-        !this.$v.confirmPassword.sameAs && errors.push('Passwords not match')
+        !this.$v.confirmPassword.sameAs && errors.push('Passwords does not match')
         return errors
       }
     },
@@ -121,6 +121,7 @@
           console.error(result.data)
           this.err = true
           this.invPass = false
+          this.submit()
         }
       },
       clear () {
