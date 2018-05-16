@@ -11,7 +11,3 @@ export default {
   components: { User }
 }
 </script>
-
-<style>
-
-</style>

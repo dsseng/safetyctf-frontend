@@ -19,7 +19,6 @@ export default {
   data () {
     return {
       auth: false,
-      admin: false,
       tasks: [],
       err: false
     }
@@ -47,7 +46,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
