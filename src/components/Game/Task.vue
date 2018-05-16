@@ -11,7 +11,7 @@
   <h1><a :href="task.url" target="_newtab">{{ task.name }}</a></h1>
   <p>You will get {{ task.money }}$ and {{ task.experience }} experience</p>
   <p>Last changed: {{ task.added }}</p>
-  <p>Made by: {{ task.by }}</p>
+  <p>Made by: <router-link :to="'/game/user/' + task.by">{{ task.by }}</router-link></p>
   <p>
     Solved by (latest 10):
     <ul>
