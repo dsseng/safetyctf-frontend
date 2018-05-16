@@ -4,6 +4,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      lang: 'English'
+    }
+  },
   methods: {
     switchLang () {
       switch (this.lang) {
@@ -19,28 +24,19 @@ export default {
           break
         }
       }
-
       this.$ls.set('lang', this.lang) // Save to localStorage
     }
   },
   created () {
-    this.lang = this.$ls.get('lang') || 'English'
-
-    switch (this.lang) {
-      case 'English': {
-        this.$i18n.locale = 'en'
-        break
-      }
-
-      case 'Русский': {
-        this.$i18n.locale = 'ru'
-        break
-      }
+    if (this.$ls.get('lang')) {
+      this.lang = this.$ls.get('lang')
+    } else {
+      this.lang = 'English' // English is default language
+      this.$i18n.locale = 'en'
     }
-  },
-  data () {
-    return {
-      lang: 'English'
+
+    if (this.lang === 'Русский') {
+      this.$i18n.locale = 'ru'
     }
   }
 }
