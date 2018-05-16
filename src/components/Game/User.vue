@@ -60,11 +60,13 @@ export default {
       } else {
         this.err = true
         this.nf = false
+        this.created()
       }
     } catch (err) {
       console.error(err)
       this.err = true
       this.nf = false
+      this.created()
     }
   },
   watch: {

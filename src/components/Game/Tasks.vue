@@ -25,23 +25,24 @@ export default {
     }
   },
   async created () {
-    setInterval(() => {
-      this.auth = this.$getAuth()
-      if (!this.auth) this.$router.push('/game/myaccount')
-    }, 50)
-
     try {
       let result = await this.$http.get(this.$apiRoot + 'tasks/')
 
       if (result.data.code === 200) {
         this.tasks = result.data.tasks
+        setInterval(() => {
+          this.auth = this.$getAuth()
+          if (!this.auth) this.$router.push('/game/myaccount')
+        }, 50)
       } else {
         console.error(result.data)
         this.err = true
+        this.created()
       }
     } catch (err) {
       console.error(err)
       this.err = true
+      this.created()
     }
   }
 }

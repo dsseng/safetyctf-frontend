@@ -156,13 +156,16 @@ export default {
           easing: 'linear',
           round: 1
         })
+        this.connErr = false
       } else {
         console.log(usersAndTasks.data)
         this.connErr = true
+        this.created()
       }
     } catch (err) {
       console.log(err)
       this.connErr = true
+      this.created()
     }
   }
 }

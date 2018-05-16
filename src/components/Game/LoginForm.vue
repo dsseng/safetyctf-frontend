@@ -108,6 +108,7 @@
           this.err = true
           this.invPass = false
           this.notFound = false
+          this.submit()
         }
       },
       clear () {

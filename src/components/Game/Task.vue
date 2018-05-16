@@ -60,6 +60,7 @@ export default {
     } catch (err) {
       console.error(err)
       this.err = true
+      this.created()
     }
   },
   computed: {
