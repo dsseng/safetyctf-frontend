@@ -51,7 +51,7 @@
       :append-icon-cb="() => (e2 = !e2)"
       :type="e2 ? 'password' : 'text'"
     ></v-text-field>
-    <v-date-picker v-model="rawDob"></v-date-picker>
+    <v-date-picker v-model="dob"></v-date-picker>
     <v-divider></v-divider>
     <v-btn @click="submit">register</v-btn>
     <v-btn @click="clear">clear</v-btn>
@@ -83,7 +83,7 @@
       e1: true,
       e2: true,
       err: false,
-      rawDob: ''
+      dob: ''
     }),
     computed: {
       emailErrors () {
