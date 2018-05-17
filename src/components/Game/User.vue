@@ -53,6 +53,7 @@ export default {
           this.err = false
 
           this.user = result.data.user
+          this.user.registerDate = this.user.registerDate.replace('T', ' ').replace('Z', '')
           this.tasksSolved = result.data.tasksSolved
         }
       } else {
@@ -79,6 +80,7 @@ export default {
             this.err = false
 
             this.user = result.data.user
+            this.user.registerDate = this.user.registerDate.replace('T', ' ').replace('Z', '')
             this.tasksSolved = result.data.tasksSolved
           }
         } else {
