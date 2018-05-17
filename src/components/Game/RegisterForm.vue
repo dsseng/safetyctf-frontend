@@ -85,7 +85,6 @@
       err: false,
       rawDob: ''
     }),
-
     computed: {
       emailErrors () {
         const errors = []
@@ -119,12 +118,8 @@
         if (!this.$v.surname.$dirty) return errors
         !this.$v.surname.required && errors.push('Surname is required')
         return errors
-      },
-      dob () {
-        return new Date(Date.parse(this.rawDob))
       }
     },
-
     methods: {
       async submit () {
         this.$v.$touch()
@@ -133,7 +128,6 @@
 
         let result = await this.$http.post(this.$apiRoot + 'auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
 
-        console.log(result)
         if (result.data.code === 200) {
           this.$v.$reset()
           this.email = ''
