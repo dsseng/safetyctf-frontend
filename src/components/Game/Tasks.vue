@@ -36,12 +36,10 @@ export default {
       } else {
         console.error(result.data)
         this.err = true
-        this.created()
       }
     } catch (err) {
       console.error(err)
       this.err = true
-      this.created()
     }
   }
 }

@@ -44,8 +44,6 @@ export default {
     try {
       let result = await this.$http.get(this.$apiRoot + 'auth/' + this.username + '/info')
 
-      console.log(result.data)
-
       if (result.data.code === 200) {
         if (!result.data.user) {
           this.nf = true
@@ -60,21 +58,17 @@ export default {
       } else {
         this.err = true
         this.nf = false
-        this.created()
       }
     } catch (err) {
       console.error(err)
       this.err = true
       this.nf = false
-      this.created()
     }
   },
   watch: {
     async username () {
       try {
         let result = await this.$http.get(this.$apiRoot + 'auth/' + this.username + '/info')
-
-        console.log(result.data)
 
         if (result.data.code === 200) {
           if (!result.data.user) {
