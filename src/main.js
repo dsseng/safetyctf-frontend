@@ -11,7 +11,7 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
 Vue.prototype.$http = axios
-Vue.prototype.$apiRoot = 'http://localhost:3000/api/' // modify this, if you have api server at another address
+Vue.prototype.$apiRoot = 'https://safetyctf.ddns.net/api/' // modify this, if you have API server at another address
 Vue.prototype.$ls = lscache
 Vue.prototype.$getToken = () => {
   return lscache.get('token')
