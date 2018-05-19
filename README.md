@@ -2,6 +2,8 @@
 
 > SafetyCTF frontend
 
+You can solve SafetyCTF tasks at [our site](https://safetyctf.ddns.net)!
+
 ## Build Setup
 
 ``` bash
