@@ -8,7 +8,7 @@
     Incorrect flag!
   </v-alert>
 
-  <h1><a :href="task.url" target="_newtab">{{ task.name }}</a></h1>
+  <h1><a :href="task.url" target="_newtab">{{ solved ? '🔒':'🔓' }} {{ task.name }}</a></h1>
   <p>You will get {{ task.money }}$ and {{ task.experience }} experience</p>
   <p>Last changed: {{ task.added }}</p>
   <p>Made by: <router-link :to="'/game/user/' + task.by">{{ task.by }}</router-link></p>
