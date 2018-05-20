@@ -8,14 +8,14 @@
     Incorrect flag!
   </v-alert>
 
-  <h1><a :href="task.url" target="_newtab">{{ solved ? '🔒':'🔓' }} {{ task.name }}</a></h1>
+  <h1><a :href="task.url" target="_newtab">{{ solved ? '🔓':'🔒' }} {{ task.name }}</a></h1>
   <p>You will get {{ task.money }}$ and {{ task.experience }} experience</p>
-  <p>Last changed: {{ task.added }}</p>
+  <p>Last changed: {{ task.added.replace('T', ' ').replace('Z', '') }}</p>
   <p>Made by: <router-link :to="'/game/user/' + task.by">{{ task.by }}</router-link></p>
   <p>
     Solved by (latest 10):
-    <ul>
-      <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">{{ un }}</router-link></li>
+    <ul style='list-style: none'>
+      <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">🌟 {{ un }}</router-link></li>
     </ul>
   </p>
   <form v-if="!solved">
