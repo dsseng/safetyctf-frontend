@@ -14,9 +14,11 @@
     <v-toolbar flat>
       <v-list>
         <v-list-tile>
-          <v-list-tile-title class="title">
+          <!--<v-list-tile-title class="title">
             SafetyCTF
-          </v-list-tile-title>
+          </v-list-tile-title>-->
+
+          <logo width='225' heigth='62.5' :isVertical='false'></logo>
         </v-list-tile>
       </v-list>
     </v-toolbar>
@@ -48,9 +50,10 @@
 
 <script>
 import LangSwitch from './Game/LangSwitch'
+import Logo from './Logo'
 
 export default {
-  components: { LangSwitch },
+  components: { LangSwitch, Logo },
   data () {
     return {
       dark: false,
