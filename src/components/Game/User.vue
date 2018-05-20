@@ -15,8 +15,8 @@
   <p>Date of birth: {{ user.dob }}</p>
   <p>
     Friends:
-    <ul>
-      <li v-for="fr in user.friends" :key="fr"><router-link :to="'/game/user/' + fr">{{ fr }}</router-link></li>
+    <ul style='list-style: none'>
+      <li v-for="fr in user.friends" :key="fr"><router-link :to="'/game/user/' + fr">🌟 {{ fr }}</router-link></li>
     </ul>
   </p>
   <p>Solved tasks:</p>
