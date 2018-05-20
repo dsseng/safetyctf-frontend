@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-toolbar>
-      <v-toolbar-title>⚡️SafetyCTF👨‍💻👩‍💻</v-toolbar-title>
+      <v-toolbar-title>⚡️<logo width='112.5' heigth='31.25' :isVertical='false' style='display: inline-block; vertical-align: middle;'></logo> 👨‍💻👩‍💻</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <lang-switch></lang-switch>
@@ -89,10 +89,11 @@
 <script>
 import anime from 'animejs'
 import LangSwitch from './Game/LangSwitch'
+import Logo from './Logo'
 
 export default {
   name: 'hello',
-  components: { LangSwitch },
+  components: { LangSwitch, Logo },
   i18n: {
     messages: {
       en: {
