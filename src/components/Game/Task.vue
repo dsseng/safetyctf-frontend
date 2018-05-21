@@ -18,7 +18,7 @@
       <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">🌟 {{ un }}</router-link></li>
     </ul>
   </p>
-  <form v-if="!solved">
+  <form v-if="!solved && $getAuth()">
     <v-text-field
       label="Flag"
       v-model="flag"
@@ -53,13 +53,15 @@ export default {
   },
   props: [ 'task' ],
   async created () {
-    try {
-      let result = await this.$http.post(this.$apiRoot + 'tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
+    if (this.$getAuth()) {
+      try {
+        let result = await this.$http.post(this.$apiRoot + 'tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
 
-      if (result.data.code === 200 && result.data.solved) this.solved = true
-    } catch (err) {
-      console.error(err)
-      this.err = true
+        if (result.data.code === 200 && result.data.solved) this.solved = true
+      } catch (err) {
+        console.error(err)
+        this.err = true
+      }
     }
   },
   computed: {

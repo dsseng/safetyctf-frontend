@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-container v-if="this.auth">
+  <v-container>
     <v-alert type="error" icon="signal_cellular_connected_no_internet_4_bar" :value="err" transition="scale-transition">
       It seems to be some connection problems
     </v-alert>
@@ -31,7 +31,6 @@ export default {
         this.tasks = result.data.tasks
         setInterval(() => {
           this.auth = this.$getAuth()
-          if (!this.auth) this.$router.push('/game/myaccount')
         }, 50)
       } else {
         console.error(result.data)

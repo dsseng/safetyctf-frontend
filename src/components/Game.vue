@@ -32,7 +32,7 @@
           <v-list-tile-title>My account</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile v-if="this.auth" to="/game/tasks">
+      <v-list-tile to="/game/tasks">
         <v-list-tile-action>
           <v-icon>code</v-icon>
         </v-list-tile-action>
