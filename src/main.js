@@ -8,7 +8,9 @@ import App from './App'
 import router from './router'
 import i18n from './i18n'
 import 'vuetify/dist/vuetify.min.css'
+import VueClipboard from 'vue-clipboard2'
 
+Vue.use(VueClipboard)
 Vue.use(Vuetify)
 Vue.prototype.$http = axios
 Vue.prototype.$apiRoot = 'https://safetyctf.ddns.net/api/' // modify this, if you have API server at another address

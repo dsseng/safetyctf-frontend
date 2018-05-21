@@ -4,12 +4,12 @@
     <div v-if="!this.auth">
       <h1>Log in</h1>
       <login-form></login-form>
-      <h1>-OR-</h1>
       <h1>Register</h1>
       <register-form></register-form>
     </div>
     <div v-if="this.auth">
-      <User :username="username"></user>
+      <user :username="username"></user>
+      <invite :username='username'></invite>
       <h1>Change password</h1>
       <password-changing-form></password-changing-form>
     </div>
@@ -22,13 +22,15 @@ import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import PasswordChangingForm from './PasswordChangingForm'
 import User from './User'
+import Invite from './Invite.vue'
 
 export default {
   components: {
     LoginForm,
     RegisterForm,
     PasswordChangingForm,
-    User
+    User,
+    Invite
   },
   data () {
     return {
