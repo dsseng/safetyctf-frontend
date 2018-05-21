@@ -66,6 +66,7 @@ export default {
     }
 
     let vm = this
+
     setInterval(() => {
       vm.auth = vm.$getAuth()
     }, 50)
