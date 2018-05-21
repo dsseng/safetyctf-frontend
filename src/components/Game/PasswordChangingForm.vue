@@ -9,42 +9,56 @@
   </v-alert>
 
   <form>
-    <v-text-field
-      label="Old password"
-      v-model="oldPassword"
-      :error-messages="oldPasswordErrors"
-      @input="$v.oldPassword.$touch()"
-      @blur="$v.oldPassword.$touch()"
-      required
-      :append-icon="e1 ? 'visibility' : 'visibility_off'"
-      :append-icon-cb="() => (e1 = !e1)"
-      :type="e1 ? 'password' : 'text'"
-    ></v-text-field>
-    <v-text-field
-      label="New password"
-      v-model="newPassword"
-      :error-messages="newPasswordErrors"
-      @input="$v.newPassword.$touch()"
-      @blur="$v.newPassword.$touch()"
-      required
-      :append-icon="e2 ? 'visibility' : 'visibility_off'"
-      :append-icon-cb="() => (e2 = !e2)"
-      :type="e2 ? 'password' : 'text'"
-    ></v-text-field>
-    <v-text-field
-      label="Confirm new password"
-      v-model="confirmPassword"
-      :error-messages="confirmPasswordErrors"
-      @input="$v.confirmPassword.$touch()"
-      @blur="$v.confirmPassword.$touch()"
-      required
-      :append-icon="e2 ? 'visibility' : 'visibility_off'"
-      :append-icon-cb="() => (e2 = !e2)"
-      :type="e2 ? 'password' : 'text'"
-    ></v-text-field>
-    <v-divider></v-divider>
-    <v-btn @click="submit">change password</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+
+    <v-layout row>
+      <v-icon style='margin-right: 5px;'>lock_open</v-icon>
+      <v-text-field
+        label="Old password"
+        v-model="oldPassword"
+        :error-messages="oldPasswordErrors"
+        @input="$v.oldPassword.$touch()"
+        @blur="$v.oldPassword.$touch()"
+        required
+        :append-icon="e1 ? 'visibility' : 'visibility_off'"
+        :append-icon-cb="() => (e1 = !e1)"
+        :type="e1 ? 'password' : 'text'"
+      ></v-text-field>
+    </v-layout>
+
+    <v-layout row>
+      <v-icon style='margin-right: 5px;'>lock</v-icon>
+      <v-text-field
+        label="New password"
+        v-model="newPassword"
+        :error-messages="newPasswordErrors"
+        @input="$v.newPassword.$touch()"
+        @blur="$v.newPassword.$touch()"
+        required
+        :append-icon="e2 ? 'visibility' : 'visibility_off'"
+        :append-icon-cb="() => (e2 = !e2)"
+        :type="e2 ? 'password' : 'text'"
+      ></v-text-field>
+    </v-layout>
+
+    <v-layout row>
+      <v-icon style='margin-right: 5px;'>lock</v-icon>
+      <v-text-field
+        label="Confirm new password"
+        v-model="confirmPassword"
+        :error-messages="confirmPasswordErrors"
+        @input="$v.confirmPassword.$touch()"
+        @blur="$v.confirmPassword.$touch()"
+        required
+        :append-icon="e2 ? 'visibility' : 'visibility_off'"
+        :append-icon-cb="() => (e2 = !e2)"
+        :type="e2 ? 'password' : 'text'"
+      ></v-text-field>
+    </v-layout>
+    
+    <v-layout row>
+      <v-btn @click="submit">change password</v-btn>
+      <v-btn @click="clear">clear</v-btn>
+    </v-layout>
   </form>
 </div>
 </template>

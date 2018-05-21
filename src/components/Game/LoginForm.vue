@@ -13,28 +13,37 @@
   </v-alert>
 
   <form>
-    <v-text-field
-      label="E-mail"
-      v-model="email"
-      :error-messages="emailErrors"
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
-      required
-    ></v-text-field>
-    <v-text-field
-      label="Password"
-      v-model="password"
-      :error-messages="passwordErrors"
-      @input="$v.password.$touch()"
-      @blur="$v.password.$touch()"
-      required
-      :append-icon="e1 ? 'visibility' : 'visibility_off'"
-      :append-icon-cb="() => (e1 = !e1)"
-      :type="e1 ? 'password' : 'text'"
-    ></v-text-field>
-    <v-divider></v-divider>
-    <v-btn @click="submit">log in</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+    <v-layout row>
+      <v-icon style='margin-right: 5px;'>email</v-icon>
+      <v-text-field
+        label="E-mail"
+        v-model="email"
+        :error-messages="emailErrors"
+        @input="$v.email.$touch()"
+        @blur="$v.email.$touch()"
+        required
+      ></v-text-field>
+    </v-layout>
+
+    <v-layout row>
+      <v-icon style='margin-right: 5px;'>lock</v-icon>
+      <v-text-field
+        label="Password"
+        v-model="password"
+        :error-messages="passwordErrors"
+        @input="$v.password.$touch()"
+        @blur="$v.password.$touch()"
+        required
+        :append-icon="e1 ? 'visibility' : 'visibility_off'"
+        :append-icon-cb="() => (e1 = !e1)"
+        :type="e1 ? 'password' : 'text'"
+      ></v-text-field>
+    </v-layout>
+
+    <v-layout row>
+      <v-btn @click="submit">log in</v-btn>
+      <v-btn @click="clear">clear</v-btn>
+    </v-layout>
   </form>
 </div>
 </template>
