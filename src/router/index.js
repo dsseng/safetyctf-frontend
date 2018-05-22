@@ -6,7 +6,7 @@ import Game from '@/components/Game'
 import MyAccount from '@/components/Game/MyAccount'
 import Tasks from '@/components/Game/Tasks'
 import UserView from '@/components/Game/UserView'
-import Invited from '@/components/Invited'
+import Invited from '@/components/Game/Invited'
 
 Vue.use(Router)
 
