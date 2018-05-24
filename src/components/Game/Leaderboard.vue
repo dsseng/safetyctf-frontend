@@ -11,7 +11,7 @@
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
-      <td>{{ props.item.username }}</td>
+      <td><router-link :to="'/game/user/' + props.item.username">{{ props.item.username }}</router-link></td>
       <td>{{ props.item.experience }}</td>
       <td>{{ props.item.money }}</td>
       <td>{{ props.item.tasksSolved.length }}</td>
