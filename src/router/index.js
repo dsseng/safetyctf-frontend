@@ -8,6 +8,7 @@ import Tasks from '@/components/Game/Tasks'
 import UserView from '@/components/Game/UserView'
 import Invited from '@/components/Game/Invited'
 import AdminPanel from '@/components/Game/AdminPanel'
+import Leaderboard from '@/components/Game/Leaderboard'
 
 Vue.use(Router)
 
@@ -37,6 +38,10 @@ export default new Router({
         {
           path: 'admin',
           component: AdminPanel
+        },
+        {
+          path: 'leaderboard',
+          component: Leaderboard
         }
       ]
     },

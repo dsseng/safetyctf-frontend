@@ -48,6 +48,14 @@
           <v-list-tile-title>Admin panel</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile to="/game/leaderboard">
+        <v-list-tile-action>
+          <v-icon>stars</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Leaderboard</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </v-navigation-drawer>
   <v-content>
