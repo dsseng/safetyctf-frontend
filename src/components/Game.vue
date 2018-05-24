@@ -40,6 +40,14 @@
           <v-list-tile-title>Tasks</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile v-if='auth && isAdmin' to="/game/admin">
+        <v-list-tile-action>
+          <v-icon>supervisor_account</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Admin panel</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </v-navigation-drawer>
   <v-content>
@@ -57,10 +65,11 @@ export default {
   data () {
     return {
       dark: false,
-      auth: false
+      auth: false,
+      isAdmin: false
     }
   },
-  mounted () {
+  async mounted () {
     this.dark = this.$ls.get('dark') || false
 
     let vm = this
@@ -71,6 +80,16 @@ export default {
     setInterval(() => {
       vm.auth = vm.$getAuth()
     }, 50)
+
+    if (this.$getAuth()) {
+      try {
+        let result = await this.$http.post(this.$apiRoot + 'info/isAdmin', { token: this.$getToken() })
+
+        if (result.data.code === 200) {
+          this.isAdmin = result.data.admin
+        }
+      } catch (err) {}
+    }
   },
   methods: {
     switchDark () {
