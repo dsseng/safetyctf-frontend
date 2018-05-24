@@ -7,6 +7,7 @@
   <v-data-table
     :headers="headers"
     :items="users"
+    :pagination.sync="pagination"
     hide-actions
     class="elevation-1"
   >
@@ -26,12 +27,13 @@ export default {
   name: 'Leaderboard',
   data: () => ({
     headers: [
-      { text: 'Name', value: 'username' },
+      { text: 'Name', value: 'username', sortable: false },
       { text: 'Experience', value: 'experience' },
       { text: 'Money', value: 'money' },
       { text: 'Solved tasks', value: 'tasksSolved.length' },
       { text: 'Friends', value: 'friends.length' }
     ],
+    pagination: { sortBy: 'experience', descending: true },
     users: [],
     err: false
   }),
