@@ -27,7 +27,7 @@ let interval = async () => {
     }
 
     try {
-      let result = await axios.post($apiRoot + 'auth/getUsername', { token: lscache.get('token') })
+      let result = await axios.post($apiRoot + 'info/getUsername', { token: lscache.get('token') })
 
       if (result.data.code === 200) {
         auth.$username = result.data.username

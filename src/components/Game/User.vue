@@ -42,7 +42,7 @@ export default {
   props: [ 'username' ],
   async created () {
     try {
-      let result = await this.$http.get(this.$apiRoot + 'auth/' + this.username + '/info')
+      let result = await this.$http.get(this.$apiRoot + 'info/' + this.username + '/info')
 
       if (result.data.code === 200) {
         if (!result.data.user) {
