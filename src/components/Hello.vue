@@ -23,7 +23,7 @@
           class="blue lighten-2 mt-5"
           dark
           large
-          to="/game"
+          to="/game/myaccount"
         >
           {{ $t('message.getStarted') }}
         </v-btn>
@@ -40,7 +40,7 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="orange" to="/game">{{ $t('message.beOne') }}</v-btn>
+            <v-btn flat color="orange" to="/game/myaccount">{{ $t('message.beOne') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -54,7 +54,7 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="green" to="/game">{{ $t('message.solve') }}</v-btn>
+            <v-btn flat color="green" to="/game/myaccount">{{ $t('message.solve') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -68,7 +68,7 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="red" to="/game">{{ $t('message.super') }}</v-btn>
+            <v-btn flat color="red" to="/game/myaccount">{{ $t('message.super') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
