@@ -7,7 +7,7 @@
       <v-btn flat to="/"><v-icon>home</v-icon>Home</v-btn>
       <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? 'Dark' : 'Light' }} theme</v-btn>
       <lang-switch></lang-switch>
-      <v-btn flat @click="logout" v-if="this.auth"><v-icon>exit_to_app</v-icon>Log out</v-btn>
+      <v-btn flat @click="logout" v-if="auth.$auth"><v-icon>exit_to_app</v-icon>Log out</v-btn>
     </v-toolbar-items>
   </v-toolbar>
   <v-navigation-drawer fixed app>
@@ -40,7 +40,7 @@
           <v-list-tile-title>Tasks</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile v-if='auth && isAdmin' to="/game/admin">
+      <v-list-tile v-if='auth.$auth && auth.$isAdmin' to="/game/admin">
         <v-list-tile-action>
           <v-icon>supervisor_account</v-icon>
         </v-list-tile-action>
@@ -67,36 +67,22 @@
 <script>
 import LangSwitch from './Game/LangSwitch'
 import Logo from './Logo'
+import auth from '../auth'
 
 export default {
   components: { LangSwitch, Logo },
   data () {
     return {
       dark: false,
-      auth: false,
-      isAdmin: false
+      auth
     }
   },
-  async mounted () {
+  mounted () {
     this.dark = this.$ls.get('dark') || false
 
     let vm = this
     this.$el.onclick = function () {
       vm.refreshToken()
-    }
-
-    setInterval(() => {
-      vm.auth = vm.$getAuth()
-    }, 50)
-
-    if (this.$getAuth()) {
-      try {
-        let result = await this.$http.post(this.$apiRoot + 'info/isAdmin', { token: this.$getToken() })
-
-        if (result.data.code === 200) {
-          this.isAdmin = result.data.admin
-        }
-      } catch (err) {}
     }
   },
   methods: {

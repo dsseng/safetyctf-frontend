@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if='auth.$auth && auth.$isAdmin'>
   <v-alert type="error" icon="signal_cellular_connected_no_internet_4_bar" :value="err" transition="scale-transition">
     It seems to be some connection problems
   </v-alert>
@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import auth from '../../auth'
+
 export default {
   name: 'TaskEditor',
   data: () => ({
@@ -105,7 +107,8 @@ export default {
       experience: 0,
       flag: '',
       url: ''
-    }
+    },
+    auth
   }),
   async created () {
     try {

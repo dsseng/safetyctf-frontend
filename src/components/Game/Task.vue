@@ -18,7 +18,7 @@
       <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">🌟 {{ un }}</router-link></li>
     </ul>
   </p>
-  <form v-if="!solved && auth">
+  <form v-if="!solved && auth.$auth">
     <v-text-field
       label="Flag"
       v-model="flag"
@@ -36,6 +36,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+import auth from '../../auth'
 
 export default {
   mixins: [validationMixin],
@@ -49,12 +50,12 @@ export default {
       inc: false,
       err: false,
       solved: false,
-      auth: false
+      auth
     }
   },
   props: [ 'task' ],
   async created () {
-    if (this.$getAuth()) {
+    if (this.auth.$auth) {
       try {
         let result = await this.$http.post(this.$apiRoot + 'tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
 
@@ -64,12 +65,6 @@ export default {
         this.err = true
       }
     }
-
-    let vm = this
-
-    setInterval(() => {
-      vm.auth = vm.$getAuth()
-    }, 50)
   },
   computed: {
     flagErrors () {

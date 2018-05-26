@@ -9,7 +9,6 @@
   </v-alert>
 
   <form>
-
     <v-layout row>
       <v-icon style='margin-right: 5px;'>lock_open</v-icon>
       <v-text-field
@@ -54,7 +53,7 @@
         :type="e2 ? 'password' : 'text'"
       ></v-text-field>
     </v-layout>
-    
+
     <v-layout row>
       <v-btn @click="submit">change password</v-btn>
       <v-btn @click="clear">clear</v-btn>

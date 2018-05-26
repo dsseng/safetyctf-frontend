@@ -1,15 +1,15 @@
 <template>
 <div>
   <v-container>
-    <div v-if="!this.auth">
+    <div v-if="!auth.$auth">
       <h1>Log in</h1>
       <login-form></login-form>
       <h1>Register</h1>
       <register-form></register-form>
     </div>
-    <div v-if="this.auth">
-      <user :username="username"></user>
-      <invite :username='username'></invite>
+    <div v-if="auth.$auth">
+      <user :username="auth.$username"></user>
+      <invite :username='auth.$username'></invite>
       <h1>Change password</h1>
       <password-changing-form></password-changing-form>
     </div>
@@ -22,7 +22,8 @@ import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import PasswordChangingForm from './PasswordChangingForm'
 import User from './User'
-import Invite from './Invite.vue'
+import Invite from './Invite'
+import auth from '../../auth'
 
 export default {
   components: {
@@ -32,27 +33,6 @@ export default {
     User,
     Invite
   },
-  data () {
-    return {
-      auth: false,
-      username: ''
-    }
-  },
-  async created () {
-    let vm = this
-    setInterval(() => {
-      vm.auth = vm.$getAuth()
-    }, 50)
-
-    if (vm.$getAuth()) {
-      try {
-        let result = await this.$http.post(this.$apiRoot + 'auth/getUsername', { token: this.$getToken() })
-
-        if (result.data.code === 200) this.username = result.data.username
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }
+  data: () => ({ auth })
 }
 </script>
