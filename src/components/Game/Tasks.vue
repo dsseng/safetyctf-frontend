@@ -2,17 +2,17 @@
 <div>
   <v-container>
     <v-alert type="error" icon="signal_cellular_connected_no_internet_4_bar" :value="err" transition="scale-transition">
-      It seems to be some connection problems
+      {{ $t('message.err') }}
     </v-alert>
 
     <v-select
       :items="[
-        'Experience',
-        'Money',
-        'Popularity'
+        $t('message.experience'),
+        $t('message.money'),
+        $t('message.popularity')
       ]"
       v-model="sortingBy"
-      label="Sort tasks by"
+      :label="$t('message.sortBy')"
       single-line
     ></v-select>
     <v-layout row justify-space-around>
@@ -27,6 +27,28 @@ import Task from './Task'
 
 export default {
   components: { Task },
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          experience: 'Experience',
+          money: 'Money',
+          popularity: 'Popularity',
+          sortBy: 'Sort tasks by',
+          err: 'It seems to be some connection problems'
+        }
+      },
+      ru: {
+        message: {
+          experience: 'Опыту',
+          money: 'Деньгам',
+          popularity: 'Популярности',
+          sortBy: 'Сортировать задания по',
+          err: 'Похоже, произошла ошибка соединения'
+        }
+      }
+    }
+  },
   data () {
     return {
       auth: false,
@@ -60,7 +82,7 @@ export default {
       let j = 0
 
       switch (this.sortingBy) {
-        case 'Experience':
+        case this.$t('message.experience'):
           for (i = 0; i < items.length; i++) {
             let value = items[i]
             // store the current item value so it can be placed right
@@ -73,7 +95,7 @@ export default {
             items[j + 1] = value
           }
           break
-        case 'Money':
+        case this.$t('message.money'):
           for (i = 0; i < items.length; i++) {
             let value = items[i]
             // store the current item value so it can be placed right
@@ -86,7 +108,7 @@ export default {
             items[j + 1] = value
           }
           break
-        case 'Popularity':
+        case this.$t('message.popularity'):
           for (i = 0; i < items.length; i++) {
             let value = items[i]
             // store the current item value so it can be placed right

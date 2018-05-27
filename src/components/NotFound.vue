@@ -10,14 +10,14 @@
       <span class="typed"></span>
     </div>
 
-    <h1 class="blue--text mb-2 display-1 text-xs-center">🤬☹️Hmm... Page not found</h1>
+    <h1 class="blue--text mb-2 display-1 text-xs-center">{{ $t('message.notfound') }}</h1>
     <v-btn
       class="blue lighten-2 mt-5"
       dark
       large
       to="/"
     >
-      Home page
+      {{ $t('message.home') }}
     </v-btn>
     <v-btn
       class="blue lighten-2 mt-5"
@@ -25,7 +25,7 @@
       large
       @click="$router.go(-1)"
     >
-      Go back
+      {{ $t('message.back') }}
     </v-btn>
   </v-layout>
 </template>
@@ -45,6 +45,24 @@ export default {
       backSpeed: 0,
       loop: true
     })
+  },
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          notfound: '🤬☹️Oops... Page not found',
+          home: 'Home',
+          back: 'Go back'
+        }
+      },
+      ru: {
+        message: {
+          notfound: '🤬☹️Упс... Страница не найдена',
+          home: 'Главная страница',
+          back: 'Назад'
+        }
+      }
+    }
   }
 }
 </script>

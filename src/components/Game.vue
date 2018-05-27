@@ -4,10 +4,10 @@
     <v-toolbar-title>⚡️SafetyCTF👨‍💻👩‍💻</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat to="/"><v-icon>home</v-icon>Home</v-btn>
-      <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? 'Dark' : 'Light' }} theme</v-btn>
+      <v-btn flat to="/"><v-icon>home</v-icon>{{ $t('message.home') }}</v-btn>
+      <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? $t('message.dark') : $t('message.light') }}</v-btn>
       <lang-switch></lang-switch>
-      <v-btn flat @click="logout" v-if="auth.$auth"><v-icon>exit_to_app</v-icon>Log out</v-btn>
+      <v-btn flat @click="logout" v-if="auth.$auth"><v-icon>exit_to_app</v-icon>{{ $t('message.logout') }}</v-btn>
     </v-toolbar-items>
   </v-toolbar>
   <v-navigation-drawer fixed app>
@@ -29,7 +29,7 @@
           <v-icon>fingerprint</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>My account</v-list-tile-title>
+          <v-list-tile-title>{{ $t('message.myaccount') }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile to="/game/tasks">
@@ -37,7 +37,7 @@
           <v-icon>code</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Tasks</v-list-tile-title>
+          <v-list-tile-title>{{ $t('message.tasks') }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile v-if='auth.$auth && auth.$isAdmin' to="/game/admin">
@@ -45,7 +45,7 @@
           <v-icon>supervisor_account</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Admin panel</v-list-tile-title>
+          <v-list-tile-title>{{ $t('message.admin') }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile to="/game/leaderboard">
@@ -53,7 +53,7 @@
           <v-icon>stars</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Leaderboard</v-list-tile-title>
+          <v-list-tile-title>{{ $t('message.leaderboard') }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -75,6 +75,34 @@ export default {
     return {
       dark: false,
       auth
+    }
+  },
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          myaccount: 'My account',
+          tasks: 'Tasks',
+          admin: 'Admin panel',
+          leaderboard: 'Leaderboard',
+          logout: 'Log out',
+          dark: 'Dark theme',
+          light: 'Light theme',
+          home: 'Home'
+        }
+      },
+      ru: {
+        message: {
+          myaccount: 'Мой аккаунт',
+          tasks: 'Задания',
+          admin: 'Панель управления',
+          leaderboard: 'Таблица лидеров',
+          logout: 'Выйти',
+          dark: 'Тёмная тема',
+          light: 'Светлая тема',
+          home: 'Главная страница'
+        }
+      }
     }
   },
   mounted () {

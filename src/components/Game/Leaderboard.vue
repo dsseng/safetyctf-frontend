@@ -25,14 +25,40 @@
 <script>
 export default {
   name: 'Leaderboard',
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          name: 'Name',
+          experience: 'Experience',
+          money: 'Money',
+          solved: 'Solved tasks',
+          friends: 'Friends'
+        }
+      },
+      ru: {
+        message: {
+          name: 'Имя',
+          experience: 'Опыт',
+          money: 'Деньги',
+          solved: 'Задач решено',
+          friends: 'Друзей'
+        }
+      }
+    }
+  },
+  computed: {
+    headers: function () {
+      return [
+        { text: this.$t('message.name'), value: 'username', sortable: false },
+        { text: this.$t('message.experience'), value: 'experience' },
+        { text: this.$t('message.money'), value: 'money' },
+        { text: this.$t('message.solved'), value: 'tasksSolved.length' },
+        { text: this.$t('message.friends'), value: 'friends.length' }
+      ]
+    }
+  },
   data: () => ({
-    headers: [
-      { text: 'Name', value: 'username', sortable: false },
-      { text: 'Experience', value: 'experience' },
-      { text: 'Money', value: 'money' },
-      { text: 'Solved tasks', value: 'tasksSolved.length' },
-      { text: 'Friends', value: 'friends.length' }
-    ],
     pagination: { sortBy: 'experience', descending: true },
     users: [],
     err: false

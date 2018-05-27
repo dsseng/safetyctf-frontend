@@ -1,26 +1,26 @@
 <template>
 <div>
   <v-alert type="error" icon="signal_cellular_connected_no_internet_4_bar" :value="err" transition="scale-transition">
-    It seems to be some connection problems
+    {{ $t('message.err') }}
   </v-alert>
 
   <v-alert type="error" icon="highlight_off" :value="inc" transition="scale-transition">
-    Incorrect flag!
+    {{ $t('message.inc') }}
   </v-alert>
 
   <h1><a :href="task.url" target="_newtab">{{ solved ? '🔓':'🔒' }} {{ task.name }}</a></h1>
-  <p>You will get {{ task.money }}$ and {{ task.experience }} experience</p>
-  <p>Last changed: {{ task.added.replace('T', ' ').replace('Z', '') }}</p>
-  <p>Made by: <router-link :to="'/game/user/' + task.by">{{ task.by }}</router-link></p>
+  <p>{{ $t('message.get') }} {{ task.money }}$ {{ $t('message.and') }} {{ task.experience }} {{ $t('message.experience') }}</p>
+  <p>{{ $t('message.lastchanged') }}: {{ task.added.replace('T', ' ').replace('Z', '') }}</p>
+  <p>{{ $t('message.madeby') }}: <router-link :to="'/game/user/' + task.by">{{ task.by }}</router-link></p>
   <p>
-    Solved by (latest 10):
+    {{ $t('message.solved') }}:
     <ul style='list-style: none'>
       <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">🌟 {{ un }}</router-link></li>
     </ul>
   </p>
   <form v-if="!solved && auth.$auth">
     <v-text-field
-      label="Flag"
+      :label="$t('message.flag')"
       v-model="flag"
       :error-messages="flagErrors"
       @input="$v.flag.$touch()"
@@ -28,7 +28,7 @@
       required
     ></v-text-field>
 
-    <v-btn @click="submit">submit</v-btn>
+    <v-btn @click="submit">{{ $t('message.submit') }}</v-btn>
   </form>
 </div>
 </template>
@@ -40,7 +40,42 @@ import auth from '../../auth'
 
 export default {
   mixins: [validationMixin],
-
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          madeby: 'Made by',
+          lastchanged: 'Last changed',
+          get: 'You will get',
+          solved: 'Solved by (latest 10)',
+          and: 'and',
+          experience: 'experience',
+          submit: 'submit',
+          err: 'It seems to be some connection problems',
+          inc: 'Incorrect flag!',
+          flag: 'Flag',
+          required: 'Flag is required',
+          invalid: 'Entered flag is not valid SafetyCTF flag'
+        }
+      },
+      ru: {
+        message: {
+          madeby: 'Создал(а)',
+          lastchanged: 'Последнее изменение',
+          get: 'Вы получите',
+          solved: 'Решили (последние 10)',
+          and: 'и',
+          experience: 'очков опыта',
+          submit: 'отправить',
+          err: 'Похоже, произошла ошибка соединения',
+          inc: 'Неправильный флаг!',
+          flag: 'Флаг',
+          required: 'Введите флаг',
+          invalid: 'Введенный флаг не является флагом SafetyCTF'
+        }
+      }
+    }
+  },
   validations: {
     flag: { required, ctfFlag: value => value.search('ctf') !== -1 }
   },
@@ -70,8 +105,8 @@ export default {
     flagErrors () {
       const errors = []
       if (!this.$v.flag.$dirty) return errors
-      !this.$v.flag.required && errors.push('Flag is required')
-      !this.$v.flag.ctfFlag && errors.push('Flag is not valid SafetyCTF flag')
+      !this.$v.flag.required && errors.push(this.$t('message.required'))
+      !this.$v.flag.ctfFlag && errors.push(this.$t('message.invalid'))
       return errors
     }
   },

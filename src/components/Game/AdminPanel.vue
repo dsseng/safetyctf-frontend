@@ -1,10 +1,10 @@
 <template>
 <v-container v-if="auth.$auth && auth.$isAdmin">
   <h1 style="text-align: center;">
-    Welcome to the admin panel!
+    {{ $t('message.welcome') }}
   </h1>
   <h2>
-    Task editor
+    {{ $t('message.taskEditor') }}
   </h2>
   <task-editor></task-editor>
 </v-container>
@@ -19,6 +19,22 @@ export default {
   data: () => ({ auth }),
   components: {
     TaskEditor
+  },
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          welcome: 'Welcome to the admin panel!',
+          taskEditor: 'Task editor'
+        }
+      },
+      ru: {
+        message: {
+          welcome: 'Welcome to the admin panel!',
+          taskEditor: 'Task editor'
+        }
+      }
+    }
   }
 }
 </script>

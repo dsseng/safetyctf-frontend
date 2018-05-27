@@ -2,15 +2,15 @@
 <div>
   <v-container>
     <div v-if="!auth.$auth">
-      <h1>Log in</h1>
+      <h1>{{ $t('message.login') }}</h1>
       <login-form></login-form>
-      <h1>Register</h1>
+      <h1>{{ $t('message.register') }}</h1>
       <register-form></register-form>
     </div>
     <div v-if="auth.$auth">
       <user :username="auth.$username"></user>
       <invite :username='auth.$username'></invite>
-      <h1>Change password</h1>
+      <h1>{{ $t('message.changePassword') }}</h1>
       <password-changing-form></password-changing-form>
     </div>
   </v-container>
@@ -33,6 +33,24 @@ export default {
     User,
     Invite
   },
-  data: () => ({ auth })
+  data: () => ({ auth }),
+  i18n: {
+    messages: {
+      en: {
+        message: {
+          login: 'Log in',
+          register: 'Register',
+          changePassword: 'Change password'
+        }
+      },
+      ru: {
+        message: {
+          login: 'Войти',
+          register: 'Зарегистрироваться',
+          changePassword: 'Сменить пароль'
+        }
+      }
+    }
+  }
 }
 </script>
