@@ -11,69 +11,89 @@
       {{ $t('message.error') }}
     </v-alert>
     <v-parallax src="static/img/602727-background-city-1920x1200-windows-7.jpg" height="600">
-      <v-layout
-        column
-        align-center
-        justify-center
-        class="yellow--text"
+      <transition
+        appear
+        appear-to-class='animated bounceInDown'
       >
-        <h1 class="yellow--text mb-2 display-1 text-xs-center">{{ $t('message.welcome') }}</h1>
-        <div class="subheading mb-3 text-xs-center">{{ $t('message.descr') }}</div>
-        <v-btn
-          class="blue lighten-2 mt-5"
-          dark
-          large
-          to="/game/myaccount"
+        <v-layout
+          column
+          align-center
+          justify-center
+          class="yellow--text"
         >
-          {{ $t('message.getStarted') }}
-        </v-btn>
-      </v-layout>
+          <h1 class="yellow--text mb-2 display-1 text-xs-center">{{ $t('message.welcome') }}</h1>
+          <div class="subheading mb-3 text-xs-center">{{ $t('message.descr') }}</div>
+          <v-btn
+            class="blue lighten-2 mt-5 animated infinite tada"
+            dark
+            large
+            to="/game/myaccount"
+          >
+            {{ $t('message.getStarted') }}
+          </v-btn>
+        </v-layout>
+      </transition>
     </v-parallax>
-    <v-layout row wrap justify-space-around>
+    <v-layout row wrap justify-space-around style='margin-top: 15px;'>
       <v-flex xs12 md3>
-        <v-card>
-          <v-card-media src="static/img/148573-best-hacking-wallpaper-1920x1080.jpg" height="200px"></v-card-media>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">{{ $t('message.manyPlayers') }}</h3>
-              <div>{{ $tc('message.users', usersTotal, { count: usersTotal }) }}</div>
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn flat color="orange" to="/game/myaccount">{{ $t('message.beOne') }}</v-btn>
-          </v-card-actions>
-        </v-card>
+        <transition
+          appear
+          appear-to-class='animated bounceInLeft'
+        >
+          <v-card>
+            <v-card-media src="static/img/148573-best-hacking-wallpaper-1920x1080.jpg" height="200px"></v-card-media>
+            <v-card-title primary-title>
+              <div>
+                <h3 class="headline mb-0">{{ $t('message.manyPlayers') }}</h3>
+                <div>{{ $tc('message.users', usersTotal, { count: usersTotal }) }}</div>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn flat color="orange" to="/game/myaccount">{{ $t('message.beOne') }}</v-btn>
+            </v-card-actions>
+          </v-card>
+        </transition>
       </v-flex>
       <v-flex xs12 md3>
-        <v-card>
-          <v-card-media src="static/img/80891-math-background-1920x1200-meizu.jpg" height="200px"></v-card-media>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">{{ $t('message.manyTasks') }}</h3>
-              <div>{{ $tc('message.tasks', tasksTotal, { count: tasksTotal }) }}</div>
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn flat color="green" to="/game/myaccount">{{ $t('message.solve') }}</v-btn>
-          </v-card-actions>
-        </v-card>
+        <transition
+          appear
+          appear-to-class='animated bounceIn'
+        >
+          <v-card>
+            <v-card-media src="static/img/80891-math-background-1920x1200-meizu.jpg" height="200px"></v-card-media>
+            <v-card-title primary-title>
+              <div>
+                <h3 class="headline mb-0">{{ $t('message.manyTasks') }}</h3>
+                <div>{{ $tc('message.tasks', tasksTotal, { count: tasksTotal }) }}</div>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn flat color="green" to="/game/myaccount">{{ $t('message.solve') }}</v-btn>
+            </v-card-actions>
+          </v-card>
+        </transition>
       </v-flex>
       <v-flex xs12 md3>
-        <v-card>
-          <v-card-media src="static/img/677680-new-cool-math-backgrounds-1920x1080-high-resolution.jpg" height="200px"></v-card-media>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">{{ $t('message.interesting') }}</h3>
-              <div>{{ $t('message.made') }}</div>
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn flat color="red" to="/game/myaccount">{{ $t('message.super') }}</v-btn>
-          </v-card-actions>
-        </v-card>
+        <transition
+          appear
+          appear-to-class='animated bounceInRight'
+        >
+          <v-card>
+            <v-card-media src="static/img/677680-new-cool-math-backgrounds-1920x1080-high-resolution.jpg" height="200px"></v-card-media>
+            <v-card-title primary-title>
+              <div>
+                <h3 class="headline mb-0">{{ $t('message.interesting') }}</h3>
+                <div>{{ $t('message.made') }}</div>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn flat color="red" to="/game/myaccount">{{ $t('message.super') }}</v-btn>
+            </v-card-actions>
+          </v-card>
+        </transition>
       </v-flex>
     </v-layout>
-    <section>
+    <section class='white' style='margin-top: 15px;'>
       <v-container>
         <p>
           {{ $t('message.competition') }}

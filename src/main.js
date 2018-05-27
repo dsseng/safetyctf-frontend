@@ -9,6 +9,7 @@ import router from './router'
 import i18n from './i18n'
 import 'vuetify/dist/vuetify.min.css'
 import VueClipboard from 'vue-clipboard2'
+import 'animate.css'
 
 Vue.use(VueClipboard)
 Vue.use(Vuetify)
