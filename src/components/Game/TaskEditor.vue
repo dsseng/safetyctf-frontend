@@ -14,24 +14,63 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.name" label="Task name"></v-text-field>
+              <v-text-field
+                v-model="editedItem.name"
+                :error-messages="nameErrors"
+                label="Name"
+                required
+                @input="$v.editedItem.name.$touch()"
+                @blur="$v.editedItem.name.$touch()"
+              ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.id" label="ID"></v-text-field>
+              <v-text-field
+                v-model="editedItem.id"
+                label="ID"
+                required
+                @input="$v.editedItem.id.$touch()"
+                @blur="$v.editedItem.id.$touch()"
+                :error-messages="idErrors"
+              ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.money" label="Money"></v-text-field>
+              <v-text-field
+                v-model="editedItem.money"
+                label="Money"
+                required
+                @input="$v.editedItem.money.$touch()"
+                @blur="$v.editedItem.money.$touch()"
+                :error-messages="moneyErrors"
+              ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.experience" label="Experience"></v-text-field>
+              <v-text-field
+                v-model="editedItem.experience"
+                label="Experience"
+                required
+                @input="$v.editedItem.experience.$touch()"
+                @blur="$v.editedItem.experience.$touch()"
+                :error-messages="experienceErrors"
+              ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.url" label="URL"></v-text-field>
+              <v-text-field
+                v-model="editedItem.url"
+                label="URL"
+                required
+                @input="$v.editedItem.url.$touch()"
+                @blur="$v.editedItem.url.$touch()"
+                :error-messages="urlErrors"
+              ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md4>
               <v-text-field
                 v-model="editedItem.flag"
                 label="Flag"
+                required
+                @input="$v.editedItem.flag.$touch()"
+                @blur="$v.editedItem.flag.$touch()"
+                :error-messages="flagErrors"
                 :append-icon="e1 ? 'visibility' : 'visibility_off'"
                 :append-icon-cb="() => (e1 = !e1)"
                 :type="e1 ? 'password' : 'text'"
@@ -74,6 +113,8 @@
 
 <script>
 import auth from '../../auth'
+import { validationMixin } from 'vuelidate'
+import { required, url, between } from 'vuelidate/lib/validators'
 
 export default {
   name: 'TaskEditor',
@@ -140,6 +181,10 @@ export default {
       }, 300)
     },
     async save () {
+      this.$v.$touch()
+
+      if (this.nameErrors.length || this.flagErrors.length || this.urlErrors.length || this.idErrors.length || this.moneyErrors.length || this.experienceErrors.length) return
+
       if (this.editedIndex > -1) {
         try {
           let result = await this.$http.patch(this.$apiRoot + 'tasks/' + this.editedItem.id, Object.assign({ token: this.$getToken() }, this.editedItem))
@@ -177,9 +222,60 @@ export default {
       val || this.close()
     }
   },
+  mixins: [ validationMixin ],
+  validations: {
+    editedItem: {
+      name: { required },
+      flag: { required, ctfFlag: value => (value.search('ctf') !== -1) },
+      url: { required, url },
+      id: { required },
+      money: { required, between: between(5, 500) },
+      experience: { required, between: between(5, 500) }
+    }
+  },
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'New Task' : 'Edit Task'
+    },
+    nameErrors () {
+      const errors = []
+      if (!this.$v.editedItem.name.$dirty) return errors
+      !this.$v.editedItem.name.required && errors.push('Name is required')
+      return errors
+    },
+    flagErrors () {
+      const errors = []
+      if (!this.$v.editedItem.flag.$dirty) return errors
+      !this.$v.editedItem.flag.required && errors.push('Flag is required')
+      !this.$v.editedItem.flag.ctfFlag && errors.push('Entered flag is not valid SafetyCTF flag')
+      return errors
+    },
+    urlErrors () {
+      const errors = []
+      if (!this.$v.editedItem.url.$dirty) return errors
+      !this.$v.editedItem.url.required && errors.push('URL is required')
+      !this.$v.editedItem.url.url && errors.push('Entered URL is not valid URL')
+      return errors
+    },
+    idErrors () {
+      const errors = []
+      if (!this.$v.editedItem.id.$dirty) return errors
+      !this.$v.editedItem.id.required && errors.push('ID is required')
+      return errors
+    },
+    moneyErrors () {
+      const errors = []
+      if (!this.$v.editedItem.money.$dirty) return errors
+      !this.$v.editedItem.money.required && errors.push('Money reward is required')
+      !this.$v.editedItem.money.between && errors.push('Money reward isn\'t in 5-500$ range')
+      return errors
+    },
+    experienceErrors () {
+      const errors = []
+      if (!this.$v.editedItem.experience.$dirty) return errors
+      !this.$v.editedItem.experience.required && errors.push('Experience reward is required')
+      !this.$v.editedItem.experience.between && errors.push('Experience reward isn\'t in 5-500 points range')
+      return errors
     }
   }
 }
