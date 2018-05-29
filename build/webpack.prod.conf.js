@@ -100,24 +100,33 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
+      },
+      {
+        // copy custom service worker
+        from: path.resolve(__dirname, './firebase-messaging-sw.js'),
+        to: config.build.assetsRoot + '/[name].js',
+        transform: (content, path) => {
+          // and transpile it while copying
+          return babel.transformFileSync(path).code
+        }
       }
     ]),
     // service worker caching
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'safetyctf',
-      filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      minify: true,
-      stripPrefix: 'dist/'
-      runtimeCaching: [{
-        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-        handler: 'cacheFirst'
-      },
-      {
-        urlPattern: /^https:\/\/gstatic\.com\//,
-        handler: 'cacheFirst'
-      }]
-    })
+    // new SWPrecacheWebpackPlugin({
+    //   cacheId: 'safetyctf',
+    //   filename: 'service-worker.js',
+    //   staticFileGlobs: ['dist/**/*.{js,html,css}'],
+    //   minify: true,
+    //   stripPrefix: 'dist/'
+    //   runtimeCaching: [{
+    //     urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+    //     handler: 'cacheFirst'
+    //   },
+    //   {
+    //     urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+    //     handler: 'cacheFirst'
+    //   }]
+    // })
   ]
 })
 

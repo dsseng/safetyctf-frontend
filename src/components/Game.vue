@@ -7,6 +7,7 @@
       <v-btn flat to="/"><v-icon>home</v-icon>{{ $t('message.home') }}</v-btn>
       <v-btn flat @click="switchDark"><v-icon>invert_colors</v-icon>{{ dark ? $t('message.dark') : $t('message.light') }}</v-btn>
       <lang-switch></lang-switch>
+      <v-btn flat @click="(isSubscribed ? unsubscribe : subscribe)()" v-if="auth.$auth"><v-icon :class="isSubscribed ? '' : 'animated infinite tada'">notifications_none</v-icon>{{ isSubscribed ? 'Unsubscribe' : 'Subscribe' }}</v-btn>
       <v-btn flat @click="logout" v-if="auth.$auth"><v-icon>exit_to_app</v-icon>{{ $t('message.logout') }}</v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -68,12 +69,19 @@
 import LangSwitch from './Game/LangSwitch'
 import Logo from './Logo'
 import auth from '../auth'
+import firebase from 'firebase'
+
+// Initialize Firebase
+firebase.initializeApp({ messagingSenderId: '652086280144' })
+const messaging = firebase.messaging()
+messaging.usePublicVapidKey('BL0N5Q6Ud09Gm8JLIuX_DEi1Iq2_ovXPX2WB_iZWSEZH1kK7GVa3h1S8-AfXfTpY3bQGrsrnhHHaukU98OUkzrY')
 
 export default {
   components: { LangSwitch, Logo },
   data () {
     return {
       dark: false,
+      isSubscribed: false,
       auth
     }
   },
@@ -112,8 +120,77 @@ export default {
     this.$el.onclick = function () {
       vm.refreshToken()
     }
+
+    if (this.$ls.get('pushTokenSentToServer')) this.isSubscribed = true
+    else this.isSubscribed = false
+
+    if ('Notification' in window && Notification.permission === 'granted' && this.isSubscribed) {
+      this.subscribe()
+    }
+
+    messaging.onMessage(function (payload) {
+      console.log('Message received. ', payload)
+    })
   },
   methods: {
+    unsubscribe () {
+      this.sendTokenToServer('')
+      this.setTokenSentToServer(false)
+    },
+    subscribe () {
+      let vm = this
+
+      messaging.requestPermission().then(function () {
+        console.log('Notification permission granted.')
+        messaging.getToken().then(async function (currentToken) {
+          if (currentToken) {
+            await vm.sendTokenToServer(currentToken)
+          } else {
+            // Show permission request.
+            console.log('No Instance ID token available. Request permission to generate one.')
+            // Show permission UI.
+            // updateUIForPushPermissionRequired()
+            vm.setTokenSentToServer(false)
+          }
+        }).catch(function (err) {
+          console.log('An error occurred while retrieving token. ', err)
+          // showToken('Error retrieving Instance ID token. ', err)
+          vm.setTokenSentToServer(false)
+        })
+
+        messaging.onTokenRefresh(function () {
+          messaging.getToken().then(async function (refreshedToken) {
+            console.log('Token refreshed.')
+            // Indicate that the new Instance ID token has not yet been sent to the
+            // app server.
+            vm.setTokenSentToServer(false)
+            // Send Instance ID token to app server.
+            await vm.sendTokenToServer(refreshedToken)
+            // ...
+          }).catch(function (err) {
+            console.log('Unable to retrieve refreshed token ', err)
+            // showToken('Unable to retrieve refreshed token ', err)
+          })
+        })
+      }).catch(function (err) {
+        console.log('Unable to get permission to notify.', err)
+      })
+    },
+    sendTokenToServer (currentToken) {
+      this.setTokenSentToServer(currentToken)
+
+      return this.$http.post(this.$apiRoot + 'push/sub', {
+        jwt: this.$getToken(),
+        token: currentToken
+      })
+    },
+    setTokenSentToServer (currentToken) {
+      if (currentToken) this.isSubscribed = true
+      else this.isSubscribed = false
+
+      this.$ls.set('pushTokenSentToServer', currentToken)
+    },
+
     switchDark () {
       this.dark = !this.dark
       this.$ls.set('dark', this.dark) // Save to localStorage
