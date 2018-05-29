@@ -112,6 +112,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       runtimeCaching: [{
         urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
         handler: 'cacheFirst'
+      },
+      {
+        urlPattern: /^https:\/\/gstatic\.com\//,
+        handler: 'cacheFirst'
       }]
     })
   ]
