@@ -70,6 +70,7 @@ import LangSwitch from './Game/LangSwitch'
 import Logo from './Logo'
 import auth from '../auth'
 import firebase from 'firebase'
+import swal from 'sweetalert2'
 
 // Initialize Firebase
 firebase.initializeApp({ messagingSenderId: '652086280144' })
@@ -130,6 +131,7 @@ export default {
 
     messaging.onMessage(function (payload) {
       console.log('Message received. ', payload)
+      swal(payload.notification.title, payload.notification.body, 'success')
     })
   },
   methods: {

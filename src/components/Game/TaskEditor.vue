@@ -211,7 +211,8 @@ export default {
 
           if (result.data.code === 201) {
             this.tasks.push(this.editedItem)
-            swal('Good job!', `${this.editedItem.name} successfully added`, 'success')
+            let vm = this
+            setTimeout(() => swal('Good job!', `${vm.editedItem.name} successfully added`, 'success'), 200)
           } else {
             console.error(result.data)
             this.err = true
