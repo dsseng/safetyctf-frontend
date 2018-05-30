@@ -179,7 +179,7 @@ export default {
     sendTokenToServer (currentToken) {
       this.setTokenSentToServer(currentToken)
 
-      return this.$http.post(this.$apiRoot + 'push/sub', {
+      return this.$http.post('/push/sub', {
         jwt: this.$getToken(),
         token: currentToken
       })
@@ -197,7 +197,7 @@ export default {
     },
     async refreshToken () {
       if (this.$getTokenExp() && this.$getToken()) {
-        let result = await this.$http.post(this.$apiRoot + 'auth/refreshToken', { token: this.$getToken() })
+        let result = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
 
         if (result.data.code === 200) {
           this.$ls.set('token', result.data.token, 60)

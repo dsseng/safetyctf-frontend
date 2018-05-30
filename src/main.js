@@ -10,11 +10,28 @@ import i18n from './i18n'
 import 'vuetify/dist/vuetify.min.css'
 import VueClipboard from 'vue-clipboard2'
 import 'animate.css'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 Vue.use(VueClipboard)
 Vue.use(Vuetify)
-Vue.prototype.$http = axios
-Vue.prototype.$apiRoot = 'https://safetyctf.ddns.net/api/' // modify this, if you have API server at another address
+
+let instance = axios.create({
+  baseURL: '/api'
+})
+// before a request is made start the nprogress
+instance.interceptors.request.use(config => {
+  NProgress.start()
+  return config
+})
+
+// before a response is returned stop nprogress
+instance.interceptors.response.use(response => {
+  NProgress.done()
+  return response
+})
+Vue.prototype.$http = instance
+
 Vue.prototype.$ls = lscache
 Vue.prototype.$getToken = () => {
   return lscache.get('token')

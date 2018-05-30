@@ -114,7 +114,7 @@
 
         if (this.oldPasswordErrors.length || this.newPasswordErrors.length || this.newPasswordErrors.length) return
 
-        let result = await this.$http.post(this.$apiRoot + 'auth/changePassword', { token: this.$getToken(), oldPassword: this.oldPassword, newPassword: this.newPassword })
+        let result = await this.$http.post('/auth/changePassword', { token: this.$getToken(), oldPassword: this.oldPassword, newPassword: this.newPassword })
 
         if (result.data.code === 200) {
           this.$v.$reset()

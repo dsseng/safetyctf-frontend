@@ -165,7 +165,7 @@ export default {
   },
   async created () {
     try {
-      let usersAndTasks = await this.$http.get(this.$apiRoot + 'stats/usersAndTasks')
+      let usersAndTasks = await this.$http.get('/stats/usersAndTasks')
 
       if (usersAndTasks.data.code === 200) {
         let vm = this

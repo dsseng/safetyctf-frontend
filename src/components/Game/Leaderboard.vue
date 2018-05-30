@@ -65,7 +65,7 @@ export default {
   }),
   async created () {
     try {
-      let result = await this.$http.get(this.$apiRoot + 'stats/leaderboard')
+      let result = await this.$http.get('/stats/leaderboard')
 
       if (result.data.code === 200) this.users = result.data.users
     } catch (err) {

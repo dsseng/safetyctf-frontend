@@ -91,7 +91,7 @@
 
         if (this.passwordErrors.length || this.emailErrors.length) return
 
-        let result = await this.$http.post(this.$apiRoot + 'auth/login', { username: this.email, password: this.password })
+        let result = await this.$http.post('/auth/login', { username: this.email, password: this.password })
 
         if (result.data.code === 200) {
           this.$ls.set('token', result.data.token, 60)

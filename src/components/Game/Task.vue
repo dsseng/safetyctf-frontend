@@ -92,7 +92,7 @@ export default {
   async created () {
     if (this.auth.$auth) {
       try {
-        let result = await this.$http.post(this.$apiRoot + 'tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
+        let result = await this.$http.post('tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
 
         if (result.data.code === 200 && result.data.solved) this.solved = true
       } catch (err) {
@@ -117,7 +117,7 @@ export default {
       if (this.flagErrors.length !== 0) return
 
       try {
-        let result = await this.$http.post(this.$apiRoot + 'tasks/' + this.task.id + '/solved', { token: this.$getToken(), flag: this.flag })
+        let result = await this.$http.post('tasks/' + this.task.id + '/solved', { token: this.$getToken(), flag: this.flag })
 
         console.log(result)
         if (result.data.code === 200) {

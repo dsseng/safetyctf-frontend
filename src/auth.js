@@ -1,7 +1,9 @@
 import axios from 'axios'
 import lscache from 'lscache'
 
-const $apiRoot = 'https://safetyctf.ddns.net/api/' // modify this, if you have API server at another address
+let instance = axios.create({
+  baseURL: '/api'
+})
 let auth = {
   $auth: false,
   $isAdmin: false,
@@ -15,7 +17,7 @@ let interval = async () => {
 
   if (auth.$auth && !oldAuth) {
     try {
-      let result = await axios.post($apiRoot + 'info/isAdmin', { token: lscache.get('token') })
+      let result = await instance.post('/info/isAdmin', { token: lscache.get('token') })
 
       if (result.data.code === 200) {
         auth.$isAdmin = result.data.admin
@@ -27,7 +29,7 @@ let interval = async () => {
     }
 
     try {
-      let result = await axios.post($apiRoot + 'info/getUsername', { token: lscache.get('token') })
+      let result = await instance.post('/info/getUsername', { token: lscache.get('token') })
 
       if (result.data.code === 200) {
         auth.$username = result.data.username

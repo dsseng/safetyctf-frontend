@@ -59,7 +59,7 @@ export default {
   },
   async created () {
     try {
-      let result = await this.$http.get(this.$apiRoot + 'tasks/')
+      let result = await this.$http.get('/tasks/')
 
       if (result.data.code === 200) {
         this.tasks = result.data.tasks

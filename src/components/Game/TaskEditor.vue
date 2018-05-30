@@ -153,7 +153,7 @@ export default {
   }),
   async created () {
     try {
-      let result = await this.$http.get(this.$apiRoot + 'tasks/')
+      let result = await this.$http.get('/tasks/')
 
       if (result.data.code === 200) {
         this.tasks = result.data.tasks
@@ -187,7 +187,7 @@ export default {
 
       if (this.editedIndex > -1) {
         try {
-          let result = await this.$http.patch(this.$apiRoot + 'tasks/' + this.editedItem.id, Object.assign({ token: this.$getToken() }, this.editedItem))
+          let result = await this.$http.patch('/tasks/' + this.editedItem.id, Object.assign({ token: this.$getToken() }, this.editedItem))
 
           if (result.data.code === 200) {
             Object.assign(this.tasks[this.editedIndex], this.editedItem)
@@ -201,7 +201,7 @@ export default {
         }
       } else {
         try {
-          let result = await this.$http.post(this.$apiRoot + 'tasks/', Object.assign({ token: this.$getToken() }, this.editedItem))
+          let result = await this.$http.post('/tasks/', Object.assign({ token: this.$getToken() }, this.editedItem))
 
           if (result.data.code === 201) {
             this.tasks.push(this.editedItem)
