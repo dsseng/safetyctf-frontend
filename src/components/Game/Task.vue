@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style='padding: 0 10px'>
   <v-alert type="error" icon="signal_cellular_connected_no_internet_4_bar" :value="err" transition="scale-transition">
     {{ $t('message.err') }}
   </v-alert>
