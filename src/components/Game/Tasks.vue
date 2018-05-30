@@ -51,7 +51,6 @@ export default {
   },
   data () {
     return {
-      auth: false,
       tasks: [],
       err: false,
       sortingBy: 'Experience'
@@ -63,9 +62,6 @@ export default {
 
       if (result.data.code === 200) {
         this.tasks = result.data.tasks
-        setInterval(() => {
-          this.auth = this.$getAuth()
-        }, 50)
       } else {
         console.error(result.data)
         this.err = true
