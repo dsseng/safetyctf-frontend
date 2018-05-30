@@ -92,36 +92,44 @@
 
         if (this.passwordErrors.length || this.emailErrors.length) return
 
-        let result = await this.$http.post('/auth/login', { username: this.email, password: this.password })
+        try {
+          let result = await this.$http.post('/auth/login', { username: this.email, password: this.password })
 
-        if (result.data.code === 200) {
-          this.$ls.set('token', result.data.token, 60)
-          this.$ls.set('token-exp', 1, 55)
+          if (result.data.code === 200) {
+            this.$ls.set('token', result.data.token, 60)
+            this.$ls.set('token-exp', 1, 55)
 
-          this.$v.$reset()
-          this.email = ''
-          this.password = ''
+            this.$v.$reset()
+            this.email = ''
+            this.password = ''
 
-          this.err = false
-          this.invPass = false
-          this.notFound = false
-        } else if (result.data.code === 401) {
-          this.invPass = true
-          this.err = false
-          this.notFound = false
-          swal('Hmm...', 'I think, you forgot your password!', 'error')
-        } else if (result.data.code === 404) {
-          this.notFound = true
-          this.err = false
-          this.invPass = false
-          swal('There is no such user!', 'This user does not exist!', 'error')
-        } else {
-          console.error(result.data)
+            this.err = false
+            this.invPass = false
+            this.notFound = false
+          } else if (result.data.code === 401) {
+            this.invPass = true
+            this.err = false
+            this.notFound = false
+            swal('Hmm...', 'I think, you forgot your password!', 'error')
+          } else if (result.data.code === 404) {
+            this.notFound = true
+            this.err = false
+            this.invPass = false
+            swal('There is no such user!', 'This user does not exist!', 'error')
+          } else {
+            console.error(result.data)
+            this.err = true
+            this.invPass = false
+            this.notFound = false
+            swal('Oops!', 'Login failed.', 'error')
+            this.submit()
+          }
+        } catch (e) {
           this.err = true
           this.invPass = false
           this.notFound = false
-          swal('Oops!', 'The server is broken! Maybe.', 'error')
-          this.submit()
+          console.error(e)
+          swal('Oops!', 'The server is not responding! Login failed.', 'error')
         }
       },
       clear () {

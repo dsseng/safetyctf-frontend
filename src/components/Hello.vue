@@ -110,6 +110,7 @@
 import anime from 'animejs'
 import LangSwitch from './Game/LangSwitch'
 import Logo from './Logo'
+import swal from 'sweetalert2'
 
 export default {
   name: 'hello',
@@ -181,10 +182,12 @@ export default {
       } else {
         console.log(usersAndTasks.data)
         this.connErr = true
+        swal('Ouch!', 'Failed to get statistics!', 'error')
       }
     } catch (err) {
       console.log(err)
       this.connErr = true
+      swal('Ouch!', 'Failed to get statistics!', 'error')
     }
   }
 }

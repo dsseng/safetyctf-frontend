@@ -84,6 +84,7 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
+  import swal from 'sweetalert2'
 
   export default {
     mixins: [validationMixin],
@@ -148,22 +149,28 @@
 
         if (this.passwordErrors.length || this.cPasswordErrors.length || this.emailErrors.length || this.nameErrors.length || this.surnameErrors.length || !this.dob || !this.$route.params.invitedBy) return
 
-        let result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob, invitedBy: this.$route.params.invitedBy })
+        try {
+          let result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob, invitedBy: this.$route.params.invitedBy })
 
-        if (result.data.code === 200) {
-          this.$v.$reset()
-          this.email = ''
-          this.password = ''
-          this.cPassword = ''
-          this.name = ''
-          this.surname = ''
+          if (result.data.code === 200) {
+            this.$v.$reset()
+            this.email = ''
+            this.password = ''
+            this.cPassword = ''
+            this.name = ''
+            this.surname = ''
 
-          this.err = false
-          swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
-        } else {
-          console.error(result.data)
+            this.err = false
+            swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
+          } else {
+            console.error(result.data)
+            this.err = true
+            swal('Oops!', 'There is some error! Regisration failed.', 'error')
+          }
+        } catch (e) {
+          console.error(e)
           this.err = true
-          swal('Oops!', 'There is some error! Regisration failed.', 'error')
+          swal('Oh no!', 'Regisration failed, server don\'t responding.', 'error')
         }
       },
       clear () {

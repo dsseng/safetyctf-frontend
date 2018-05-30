@@ -147,6 +147,7 @@ export default {
               console.error(result.data)
               this.err = true
               this.inc = false
+              swal('Oops!', 'An error occured.', 'error')
               break
             }
           }
@@ -155,6 +156,7 @@ export default {
         console.error(err)
         this.err = true
         this.inc = false
+        swal('Oops!', 'Server error.', 'error')
       }
     }
   }

@@ -149,22 +149,28 @@
 
         if (this.passwordErrors.length || this.cPasswordErrors.length || this.emailErrors.length || this.nameErrors.length || this.surnameErrors.length || !this.dob) return
 
-        let result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
+        try {
+          let result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
 
-        if (result.data.code === 200) {
-          this.$v.$reset()
-          this.email = ''
-          this.password = ''
-          this.cPassword = ''
-          this.name = ''
-          this.surname = ''
+          if (result.data.code === 200) {
+            this.$v.$reset()
+            this.email = ''
+            this.password = ''
+            this.cPassword = ''
+            this.name = ''
+            this.surname = ''
 
-          this.err = false
-          swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
-        } else {
-          console.error(result.data)
+            this.err = false
+            swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
+          } else {
+            console.error(result.data)
+            this.err = true
+            swal('Oops!', 'There is some error! Regisration failed.', 'error')
+          }
+        } catch (e) {
+          console.error(e)
           this.err = true
-          swal('Oops!', 'There is some error! Regisration failed.', 'error')
+          swal('Oops!', 'Server error! Regisration failed.', 'error')
         }
       },
       clear () {

@@ -115,26 +115,33 @@
 
         if (this.oldPasswordErrors.length || this.newPasswordErrors.length || this.newPasswordErrors.length) return
 
-        let result = await this.$http.post('/auth/changePassword', { token: this.$getToken(), oldPassword: this.oldPassword, newPassword: this.newPassword })
+        try {
+          let result = await this.$http.post('/auth/changePassword', { token: this.$getToken(), oldPassword: this.oldPassword, newPassword: this.newPassword })
 
-        if (result.data.code === 200) {
-          this.$v.$reset()
-          this.oldPassword = ''
-          this.newPassword = ''
-          this.confirmPassword = ''
+          if (result.data.code === 200) {
+            this.$v.$reset()
+            this.oldPassword = ''
+            this.newPassword = ''
+            this.confirmPassword = ''
 
-          this.err = false
-          this.invPass = false
-          swal('OK!', 'Password changed! Hooray!', 'success')
-        } else if (result.data.code === 401) {
-          this.invPass = true
-          this.err = false
-          swal('Oops!', 'Old password isn\'t correct!', 'warning')
-        } else {
-          console.error(result.data)
+            this.err = false
+            this.invPass = false
+            swal('OK!', 'Password changed! Hooray!', 'success')
+          } else if (result.data.code === 401) {
+            this.invPass = true
+            this.err = false
+            swal('Oops!', 'Old password isn\'t correct!', 'warning')
+          } else {
+            console.error(result.data)
+            this.err = true
+            this.invPass = false
+            swal('Oh no!', 'There is some error!', 'error')
+          }
+        } catch (e) {
           this.err = true
           this.invPass = false
-          swal('Oh no!', 'There is some error!', 'error')
+          console.error(e)
+          swal('Noooo!', 'Server is not responding, password changing failed.', 'error')
         }
       },
       clear () {

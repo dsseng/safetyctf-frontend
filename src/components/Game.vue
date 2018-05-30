@@ -197,11 +197,15 @@ export default {
     },
     async refreshToken () {
       if (this.$getTokenExp() && this.$getToken()) {
-        let result = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
+        try {
+          let result = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
 
-        if (result.data.code === 200) {
-          this.$ls.set('token', result.data.token, 60)
-          this.$ls.set('token-exp', 1, 55)
+          if (result.data.code === 200) {
+            this.$ls.set('token', result.data.token, 60)
+            this.$ls.set('token-exp', 1, 55)
+          }
+        } catch (e) {
+          console.log(e)
         }
       }
     },
