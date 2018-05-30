@@ -148,7 +148,7 @@
 
         if (this.passwordErrors.length || this.cPasswordErrors.length || this.emailErrors.length || this.nameErrors.length || this.surnameErrors.length || !this.dob) return
 
-        let result = await this.$http.post('/sauth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
+        let result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
 
         if (result.data.code === 200) {
           this.$v.$reset()
