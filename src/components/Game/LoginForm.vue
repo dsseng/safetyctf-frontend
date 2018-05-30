@@ -51,6 +51,7 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, email } from 'vuelidate/lib/validators'
+  import swal from 'sweetalert2'
 
   export default {
     mixins: [validationMixin],
@@ -108,15 +109,18 @@
           this.invPass = true
           this.err = false
           this.notFound = false
+          swal('Hmm...', 'I think, you forgot your password!', 'error')
         } else if (result.data.code === 404) {
           this.notFound = true
           this.err = false
           this.invPass = false
+          swal('There is no such user!', 'This user does not exist!', 'error')
         } else {
           console.error(result.data)
           this.err = true
           this.invPass = false
           this.notFound = false
+          swal('Oops!', 'The server is broken! Maybe.', 'error')
           this.submit()
         }
       },

@@ -2,17 +2,24 @@
   <div>
     <h1>{{ $t('message.invite') }}</h1>
     {{ $t('message.text') }}
-    <v-btn v-clipboard:copy="msg">{{ $t('message.copy') }}</v-btn>
+    <v-btn v-clipboard:copy="msg" v-clipboard:success="ok">{{ $t('message.copy') }}</v-btn>
   </div>
 </template>
 
 <script>
+import swal from 'sweetalert2'
+
 export default {
   name: 'Invite',
   props: ['username'],
   computed: {
     msg () {
       return 'https://safetyctf.ddns.net/#/game/invited/' + this.username
+    }
+  },
+  methods: {
+    ok () {
+      swal('Cool!', 'Paste it and send to your friend!', 'success')
     }
   },
   i18n: {

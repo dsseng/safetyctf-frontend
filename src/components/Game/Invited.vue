@@ -159,10 +159,11 @@
           this.surname = ''
 
           this.err = false
+          swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
         } else {
           console.error(result.data)
           this.err = true
-          this.submit()
+          swal('Oops!', 'There is some error! Regisration failed.', 'error')
         }
       },
       clear () {
