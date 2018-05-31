@@ -100,15 +100,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
-      },
-      {
-        // copy custom service worker
-        from: path.resolve(__dirname, './firebase-messaging-sw.js'),
-        to: config.build.assetsRoot + '/[name].js',
-        transform: (content, path) => {
-          // and transpile it while copying
-          return babel.transformFileSync(path).code
-        }
       }
     ]),
     // service worker caching

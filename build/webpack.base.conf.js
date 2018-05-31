@@ -4,6 +4,8 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const babel = require('babel-core')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -27,6 +29,19 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        // copy custom service worker
+        from: path.resolve(__dirname, './firebase-messaging-sw.js'),
+        to: config.build.assetsRoot + '/[name].js',
+        transform: (content, path) => {
+          // and transpile it while copying
+          return babel.transformFileSync(path).code
+        }
+      }
+    ])
+  ],
   module: {
     rules: [
       {

@@ -30,17 +30,6 @@ module.exports = merge(baseWebpackConfig, {
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new CopyWebpackPlugin([
-      {
-        // copy custom service worker
-        from: path.resolve(__dirname, './firebase-messaging-sw.js'),
-        to: config.build.assetsRoot + '/[name].js',
-        transform: (content, path) => {
-          // and transpile it while copying
-          return babel.transformFileSync(path).code
-        }
-      }
-    ]),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
