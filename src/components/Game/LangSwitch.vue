@@ -24,12 +24,12 @@ export default {
           break
         }
       }
-      this.$ls.set('lang', this.lang) // Save to localStorage
+      localStorage.setItem('lang', this.lang) // Save to localStorage
     }
   },
   created () {
-    if (this.$ls.get('lang')) {
-      this.lang = this.$ls.get('lang')
+    if (localStorage.getItem('lang')) {
+      this.lang = localStorage.getItem('lang')
     } else {
       this.lang = 'English' // English is default language
       this.$i18n.locale = 'en'

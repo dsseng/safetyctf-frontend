@@ -32,7 +32,6 @@ instance.interceptors.response.use(response => {
 })
 Vue.prototype.$http = instance
 
-Vue.prototype.$ls = lscache
 Vue.prototype.$getToken = () => {
   return lscache.get('token')
 }

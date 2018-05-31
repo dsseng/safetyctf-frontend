@@ -52,6 +52,7 @@
   import { validationMixin } from 'vuelidate'
   import { required, email } from 'vuelidate/lib/validators'
   import swal from 'sweetalert2'
+  import lscache from 'lscache'
 
   export default {
     mixins: [validationMixin],
@@ -96,8 +97,8 @@
           let result = await this.$http.post('/auth/login', { username: this.email, password: this.password })
 
           if (result.data.code === 200) {
-            this.$ls.set('token', result.data.token, 60)
-            this.$ls.set('token-exp', 1, 55)
+            lscache.setItem('token', result.data.token, 60)
+            lscache.setItem('token-exp', 1, 55)
 
             this.$v.$reset()
             this.email = ''

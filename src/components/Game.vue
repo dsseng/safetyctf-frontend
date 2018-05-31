@@ -71,6 +71,7 @@ import Logo from './Logo'
 import auth from '../auth'
 import firebase from 'firebase'
 import swal from 'sweetalert2'
+import lscache from 'lscache'
 
 // Initialize Firebase
 firebase.initializeApp({ messagingSenderId: '652086280144' })
@@ -115,14 +116,14 @@ export default {
     }
   },
   mounted () {
-    this.dark = this.$ls.get('dark') || false
+    this.dark = localStorage.getItem('dark') || false
 
     let vm = this
     this.$el.onclick = function () {
       vm.refreshToken()
     }
 
-    if (this.$ls.get('pushTokenSentToServer')) this.isSubscribed = true
+    if (localStorage.getItem('pushTokenSentToServer')) this.isSubscribed = true
     else this.isSubscribed = false
 
     if ('Notification' in window && Notification.permission === 'granted' && this.isSubscribed) {
@@ -190,12 +191,12 @@ export default {
       if (currentToken) this.isSubscribed = true
       else this.isSubscribed = false
 
-      this.$ls.set('pushTokenSentToServer', currentToken)
+      localStorage.setItem('pushTokenSentToServer', currentToken)
     },
 
     switchDark () {
       this.dark = !this.dark
-      this.$ls.set('dark', this.dark) // Save to localStorage
+      localStorage.setItem('dark', this.dark) // Save to localStorage
     },
     async refreshToken () {
       if (this.$getTokenExp() && this.$getToken()) {
@@ -203,8 +204,8 @@ export default {
           let result = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
 
           if (result.data.code === 200) {
-            this.$ls.set('token', result.data.token, 60)
-            this.$ls.set('token-exp', 1, 55)
+            lscache.setItem('token', result.data.token, 60)
+            lscache.setItem('token-exp', 1, 55)
           }
         } catch (e) {
           console.log(e)
