@@ -97,8 +97,8 @@
           let result = await this.$http.post('/auth/login', { username: this.email, password: this.password })
 
           if (result.data.code === 200) {
-            lscache.setItem('token', result.data.token, 60)
-            lscache.setItem('token-exp', 1, 55)
+            lscache.set('token', result.data.token, 60)
+            lscache.set('token-exp', 1, 55)
 
             this.$v.$reset()
             this.email = ''

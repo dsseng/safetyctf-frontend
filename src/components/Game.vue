@@ -126,7 +126,7 @@ export default {
     if (localStorage.getItem('pushTokenSentToServer')) this.isSubscribed = true
     else this.isSubscribed = false
 
-    if ('Notification' in window && Notification.permission === 'granted' && this.isSubscribed) {
+    if ('Notification' in window && Notification.permission === 'granted' && this.isSubscribed && this.auth.$auth) {
       this.subscribe()
     }
 
@@ -204,8 +204,8 @@ export default {
           let result = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
 
           if (result.data.code === 200) {
-            lscache.setItem('token', result.data.token, 60)
-            lscache.setItem('token-exp', 1, 55)
+            lscache.set('token', result.data.token, 60)
+            lscache.set('token-exp', 1, 55)
           }
         } catch (e) {
           console.log(e)
@@ -213,8 +213,8 @@ export default {
       }
     },
     logout () {
-      this.$ls.remove('token')
-      this.$ls.remove('token-exp')
+      lscache.remove('token')
+      lscache.remove('token-exp')
     }
   }
 }
