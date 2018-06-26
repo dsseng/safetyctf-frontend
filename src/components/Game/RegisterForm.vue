@@ -112,9 +112,8 @@
             shortPassword: 'Pasword is too short',
             noCPassword: 'Password confirmation is required',
             doesntMatch: 'Passwords does not match',
-            name: 'Name is required',
-            surname: 'Surname is required',
-
+            nameReq: 'Name is required',
+            surnameReq: 'Surname is required'
           }
         },
         ru: {
@@ -126,15 +125,14 @@
             cPassword: 'Подтвердите пароль',
             register: 'Зарегистрироваться',
             clear: 'Очистить',
-            invalidEmail: 'Must be valid e-mail',
-            noEmail: 'E-mail is required',
-            noPassword: 'Password is required',
-            shortPassword: 'Pasword is too short',
-            noCPassword: 'Password confirmation is required',
-            doesntMatch: 'Passwords does not match',
-            name: 'Name is required',
-            surname: 'Surname is required',
-
+            invalidEmail: 'Введите корректный e-mail',
+            noEmail: 'Введите e-mail',
+            noPassword: 'Введите пароль',
+            shortPassword: 'Пароль слишком короткий',
+            noCPassword: 'Необходимо подтверждение пароля',
+            doesntMatch: 'Пароли не совпадают',
+            nameReq: 'Введите имя',
+            surnameReq: 'Введите фамилию'
           }
         }
       }
@@ -169,19 +167,19 @@
         const errors = []
         if (!this.$v.cPassword.$dirty) return errors
         !this.$v.cPassword.required && errors.push(this.$t('message.noCPassword'))
-        !this.$v.cPassword.sameAsPassword && errors.push(this.$t('doesntMatch'))
+        !this.$v.cPassword.sameAsPassword && errors.push(this.$t('message.doesntMatch'))
         return errors
       },
       nameErrors () {
         const errors = []
         if (!this.$v.name.$dirty) return errors
-        !this.$v.name.required && errors.push(this.$t('message.name'))
+        !this.$v.name.required && errors.push(this.$t('message.nameReq'))
         return errors
       },
       surnameErrors () {
         const errors = []
         if (!this.$v.surname.$dirty) return errors
-        !this.$v.surname.required && errors.push(this.$t('message.surname'))
+        !this.$v.surname.required && errors.push(this.$t('message.surnameReq'))
         return errors
       }
     },
