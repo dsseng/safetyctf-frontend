@@ -95,6 +95,7 @@
       password: { required, minLength: minLength(8) },
       cPassword: { required, sameAsPassword: sameAs('password') }
     },
+    props: [ 'invitedBy' ],
     i18n: {
       messages: {
         en: {
@@ -190,7 +191,12 @@
         if (this.passwordErrors.length || this.cPasswordErrors.length || this.emailErrors.length || this.nameErrors.length || this.surnameErrors.length || !this.dob) return
 
         try {
-          let result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
+          let result
+          if (this.invitedBy) {
+            result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob, invitedBy: this.invitedBy })
+          } else {
+            result = await this.$http.post('/auth/register', { username: this.email, password: this.password, name: this.name, surname: this.surname, dob: this.dob })
+          }
 
           if (result.data.code === 200) {
             this.$v.$reset()
