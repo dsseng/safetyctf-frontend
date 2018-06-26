@@ -30,8 +30,8 @@ export default {
       },
       ru: {
         message: {
-          welcome: 'Welcome to the admin panel!',
-          taskEditor: 'Task editor'
+          welcome: 'Добро пожаловать в панель управления!',
+          taskEditor: 'Редактор задач'
         }
       }
     }
