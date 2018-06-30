@@ -116,7 +116,7 @@ export default {
     }
   },
   mounted () {
-    this.dark = localStorage.getItem('dark') || false
+    this.dark = localStorage.getItem('dark') === 'true'
 
     let vm = this
     this.$el.onclick = function () {
