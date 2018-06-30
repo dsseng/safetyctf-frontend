@@ -8,11 +8,11 @@
   </v-alert>
 
   <h1>{{ user.name }} {{ user.surname }} ({{ user.username }})</h1>
-  <p>Role (capabilities): {{ user.role }}</p>
-  <p>Money: {{ user.money }}$</p>
-  <p>Experience: {{ user.experience }}</p>
-  <p>Registered at: {{ user.registerDate.replace('T', ' ').replace('Z', '') }}</p>
-  <p>Date of birth: {{ user.dob }}</p>
+  <p v-if="user.role === 'admin'">🌟 Admin</p>
+  <p><v-icon>money</v-icon> {{ user.money }}$</p>
+  <p><v-icon>star</v-icon> {{ user.experience }}</p>
+  <p><v-icon>how_to_reg</v-icon> {{ user.registerDate.replace('T', ' ').replace('Z', '') }}</p>
+  <p><v-icon>cake</v-icon> {{ user.dob }}</p>
   <p>
     Friends:
     <ul style='list-style: none'>

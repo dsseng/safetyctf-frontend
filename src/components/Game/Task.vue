@@ -9,8 +9,9 @@
   </v-alert>
 
   <h1><a :href="task.url" target="_newtab">{{ solved ? '🔓':'🔒' }} {{ task.name }}</a></h1>
-  <p>{{ $t('message.get') }} {{ task.money }}$ {{ $t('message.and') }} {{ task.experience }} {{ $t('message.experience') }}</p>
-  <p>{{ $t('message.lastchanged') }}: {{ task.added.replace('T', ' ').replace('Z', '') }}</p>
+  <p><v-icon>money</v-icon> {{ task.money }}$</p>
+  <p><v-icon>star</v-icon> {{ task.experience }}</p>
+  <p><v-icon>access_time</v-icon> {{ task.added.replace('T', ' ').replace('Z', '') }}</p>
   <p>{{ $t('message.madeby') }}: <router-link :to="'/game/user/' + task.by">{{ task.by }}</router-link></p>
   <p>
     {{ $t('message.solved') }}:
