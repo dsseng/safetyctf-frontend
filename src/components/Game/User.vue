@@ -41,33 +41,11 @@ export default {
     }
   },
   props: [ 'username' ],
-  async created () {
-    try {
-      let result = await this.$http.get('/info/' + this.username)
-
-      if (result.data.code === 200) {
-        if (!result.data.user) {
-          this.nf = true
-          this.err = false
-        } else {
-          this.nf = false
-          this.err = false
-
-          this.user = result.data.user
-          this.tasksSolved = result.data.tasksSolved
-        }
-      } else {
-        this.err = true
-        this.nf = false
-      }
-    } catch (err) {
-      console.error(err)
-      this.err = true
-      this.nf = false
-    }
+  created () {
+    this.getAccount(false)
   },
-  watch: {
-    async username () {
+  methods: {
+    async getAccount (isUpdated) {
       try {
         let result = await this.$http.get('/info/' + this.username)
 
@@ -75,7 +53,7 @@ export default {
           if (!result.data.user) {
             this.nf = true
             this.err = false
-            swal('There is no such user!', 'This user does not exist!', 'error')
+            if (isUpdated) swal('There is no such user!', 'This user does not exist!', 'error')
           } else {
             this.nf = false
             this.err = false
@@ -86,14 +64,26 @@ export default {
         } else {
           this.err = true
           this.nf = false
-          swal('Ouch!', 'Failed to get info about this user!', 'error')
+          if (isUpdated) swal('Ouch!', 'Failed to get info about this user!', 'error')
         }
       } catch (err) {
-        console.error(err)
-        this.err = true
-        this.nf = false
-        swal('Ouch!', 'Failed to get info about this user!', 'error')
+        if (this.retries < 3) {
+          console.error(err)
+          this.getAccount()
+          this.retries++
+        } else {
+          console.error(err)
+          this.err = true
+          this.nf = false
+          if (isUpdated) swal('Ouch!', 'Failed to get info about this user!', 'error')
+        }
       }
+    }
+  },
+  watch: {
+    username () {
+      this.retries = 0
+      this.getAccount(true)
     }
   }
 }

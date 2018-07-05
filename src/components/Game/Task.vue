@@ -8,7 +8,7 @@
     {{ $t('message.inc') }}
   </v-alert>
 
-  <h1><a :href="task.url" target="_newtab">{{ solved ? '🔓':'🔒' }} {{ task.name }}</a></h1>
+  <h1><a :href="task.url" target="_newtab">{{ isSolved ? '🔓':'🔒' }} {{ task.name }}</a></h1>
   <p><v-icon>money</v-icon> {{ task.money }}$</p>
   <p><v-icon>star</v-icon> {{ task.experience }}</p>
   <p><v-icon>access_time</v-icon> {{ task.added.replace('T', ' ').replace('Z', '') }}</p>
@@ -19,7 +19,7 @@
       <li v-for="un in task.solvedBy.reverse().slice(0, 9)" :key="un"><router-link :to="'/game/user/' + un">🌟 {{ un }}</router-link></li>
     </ul>
   </p>
-  <form v-if="!solved && auth.$auth">
+  <form v-if="!isSolved && auth.$auth">
     <v-text-field
       :label="$t('message.flag')"
       v-model="flag"
@@ -86,22 +86,14 @@ export default {
       flag: '',
       inc: false,
       err: false,
-      solved: false,
-      auth
+      isSolved: false,
+      auth,
+      retries: 0
     }
   },
   props: [ 'task' ],
-  async created () {
-    if (this.auth.$auth) {
-      try {
-        let result = await this.$http.post('tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
-
-        if (result.data.code === 200 && result.data.solved) this.solved = true
-      } catch (err) {
-        console.error(err)
-        this.err = true
-      }
-    }
+  created () {
+    this.getSolved()
   },
   computed: {
     flagErrors () {
@@ -113,6 +105,24 @@ export default {
     }
   },
   methods: {
+    async getSolved () {
+      if (this.auth.$auth) {
+        try {
+          let result = await this.$http.post('tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
+
+          if (result.data.code === 200 && result.data.solved) this.isSolved = true
+        } catch (err) {
+          if (this.retries < 3) {
+            console.error(err)
+            this.getSolved()
+            this.retries++
+          } else {
+            console.error(err)
+            this.err = true
+          }
+        }
+      }
+    },
     async submit () {
       this.$v.$touch()
 
@@ -125,7 +135,7 @@ export default {
         if (result.data.code === 200) {
           this.$v.$reset()
           this.flag = ''
-          this.solved = true
+          this.isSolved = true
 
           this.err = false
           this.inc = false

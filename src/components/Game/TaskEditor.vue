@@ -150,26 +150,36 @@ export default {
       flag: '',
       url: ''
     },
-    auth
+    auth,
+    retries: 0
   }),
-  async created () {
-    try {
-      let result = await this.$http.get('/tasks/')
-
-      if (result.data.code === 200) {
-        this.tasks = result.data.tasks
-      } else {
-        console.error(result.data)
-        this.err = true
-        swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
-      }
-    } catch (err) {
-      console.error(err)
-      this.err = true
-      swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
-    }
+  created () {
+    this.getTasks()
   },
   methods: {
+    async getTasks () {
+      try {
+        let result = await this.$http.get('/tasks/')
+
+        if (result.data.code === 200) {
+          this.tasks = result.data.tasks
+        } else {
+          console.error(result.data)
+          this.err = true
+          swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
+        }
+      } catch (err) {
+        if (this.retries < 3) {
+          console.error(err)
+          this.getTasks()
+          this.retries++
+        } else {
+          console.error(err)
+          this.err = true
+          swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
+        }
+      }
+    },
     edit (item) {
       this.editedIndex = this.tasks.indexOf(item)
       this.editedItem = Object.assign({}, item)
