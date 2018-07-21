@@ -38,7 +38,6 @@
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import auth from '../../auth'
-import swal from 'sweetalert2'
 
 export default {
   mixins: [validationMixin],
@@ -138,7 +137,7 @@ export default {
 
           this.err = false
           this.inc = false
-          swal('Congratulations!', `You solved ${this.task.name}`, 'success')
+          this.$swal('Congratulations!', `You solved ${this.task.name}`, 'success')
         } else {
           switch (data.code) {
             case 404: {
@@ -150,14 +149,14 @@ export default {
             case 418: {
               this.inc = true
               this.err = false
-              swal('Oops!', 'Your flag is incorrect', 'error')
+              this.$swal('Oops!', 'Your flag is incorrect', 'error')
               break
             }
             default: {
               console.error(data)
               this.err = true
               this.inc = false
-              swal('Oops!', 'An error occured.', 'error')
+              this.$swal('Oops!', 'An error occured.', 'error')
               break
             }
           }
@@ -166,7 +165,7 @@ export default {
         console.error(err)
         this.err = true
         this.inc = false
-        swal('Oops!', 'Server error.', 'error')
+        this.$swal('Oops!', 'Server error.', 'error')
       }
     }
   }

@@ -24,7 +24,6 @@
 
 <script>
 import Task from './Task'
-import swal from 'sweetalert2'
 
 export default {
   components: { Task },
