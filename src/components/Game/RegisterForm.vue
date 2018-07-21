@@ -84,7 +84,6 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
-  import swal from 'sweetalert2'
 
   export default {
     mixins: [validationMixin],
@@ -207,16 +206,16 @@
             this.surname = ''
 
             this.err = false
-            swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
+            this.$swal('Hi!', 'Welcome to the SafetyCTF. You are registered now!', 'success')
           } else {
             console.error(result.data)
             this.err = true
-            swal('Oops!', 'There is some error! Regisration failed.', 'error')
+            this.$swal('Oops!', 'There is some error! Regisration failed.', 'error')
           }
         } catch (e) {
           console.error(e)
           this.err = true
-          swal('Oops!', 'Server error! Regisration failed.', 'error')
+          this.$swal('Oops!', 'Server error! Regisration failed.', 'error')
         }
       },
       clear () {

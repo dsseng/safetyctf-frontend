@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import swal from 'sweetalert2'
-
 export default {
   name: 'Invite',
   props: ['username'],
@@ -19,7 +17,7 @@ export default {
   },
   methods: {
     ok () {
-      swal('Cool!', 'Paste it and send to your friend!', 'success')
+      this.$swal('Cool!', 'Paste it and send to your friend!', 'success')
     }
   },
   i18n: {

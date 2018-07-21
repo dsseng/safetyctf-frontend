@@ -65,7 +65,6 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, minLength, sameAs } from 'vuelidate/lib/validators'
-  import swal from 'sweetalert2'
 
   export default {
     mixins: [validationMixin],
@@ -126,22 +125,22 @@
 
             this.err = false
             this.invPass = false
-            swal('OK!', 'Password changed! Hooray!', 'success')
+            this.$swal('OK!', 'Password changed! Hooray!', 'success')
           } else if (data.code === 401) {
             this.invPass = true
             this.err = false
-            swal('Oops!', 'Old password isn\'t correct!', 'warning')
+            this.$swal('Oops!', 'Old password isn\'t correct!', 'warning')
           } else {
             console.error(data)
             this.err = true
             this.invPass = false
-            swal('Oh no!', 'There is some error!', 'error')
+            this.$swal('Oh no!', 'There is some error!', 'error')
           }
         } catch (e) {
           this.err = true
           this.invPass = false
           console.error(e)
-          swal('Noooo!', 'Server is not responding, password changing failed.', 'error')
+          this.$swal('Noooo!', 'Server is not responding, password changing failed.', 'error')
         }
       },
       clear () {

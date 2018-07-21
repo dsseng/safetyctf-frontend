@@ -12,6 +12,7 @@ import VueClipboard from 'vue-clipboard2'
 import 'animate.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import swal from 'sweetalert2'
 
 Vue.use(VueClipboard)
 Vue.use(Vuetify)
@@ -31,6 +32,8 @@ instance.interceptors.response.use(response => {
   return response
 })
 Vue.prototype.$http = instance
+
+Vue.prototype.$swal = swal
 
 Vue.prototype.$getToken = () => {
   return lscache.get('token')

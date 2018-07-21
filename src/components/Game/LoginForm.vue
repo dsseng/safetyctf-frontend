@@ -51,7 +51,6 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, email } from 'vuelidate/lib/validators'
-  import swal from 'sweetalert2'
   import lscache from 'lscache'
 
   export default {
@@ -111,18 +110,18 @@
             this.invPass = true
             this.err = false
             this.notFound = false
-            swal('Hmm...', 'I think, you forgot your password!', 'error')
+            this.$swal('Hmm...', 'I think, you forgot your password!', 'error')
           } else if (data.code === 404) {
             this.notFound = true
             this.err = false
             this.invPass = false
-            swal('There is no such user!', 'This user does not exist!', 'error')
+            this.$this.$swal('There is no such user!', 'This user does not exist!', 'error')
           } else {
             console.error(data)
             this.err = true
             this.invPass = false
             this.notFound = false
-            swal('Oops!', 'Login failed.', 'error')
+            this.$swal('Oops!', 'Login failed.', 'error')
             this.submit()
           }
         } catch (e) {
@@ -130,7 +129,7 @@
           this.invPass = false
           this.notFound = false
           console.error(e)
-          swal('Oops!', 'The server is not responding! Login failed.', 'error')
+          this.$swal('Oops!', 'The server is not responding! Login failed.', 'error')
         }
       },
       clear () {

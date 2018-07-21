@@ -24,7 +24,6 @@
 
 <script>
 import Task from './Task'
-import swal from 'sweetalert2'
 
 export default {
   components: { Task },
@@ -68,7 +67,7 @@ export default {
         } else {
           console.error(result.data)
           this.err = true
-          swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
+          this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
         }
       } catch (err) {
         if (this.retries < 3) {
@@ -78,7 +77,7 @@ export default {
         } else {
           console.error(err)
           this.err = true
-          swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
+          this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
         }
       }
     }

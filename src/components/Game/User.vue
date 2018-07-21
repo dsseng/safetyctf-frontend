@@ -28,7 +28,6 @@
 
 <script>
 import Task from './Task'
-import swal from 'sweetalert2'
 
 export default {
   components: { Task },
@@ -53,7 +52,7 @@ export default {
           if (!data.user) {
             this.nf = true
             this.err = false
-            if (isUpdated) swal('There is no such user!', 'This user does not exist!', 'error')
+            if (isUpdated) this.$swal('There is no such user!', 'This user does not exist!', 'error')
           } else {
             this.nf = false
             this.err = false
@@ -64,7 +63,7 @@ export default {
         } else {
           this.err = true
           this.nf = false
-          if (isUpdated) swal('Ouch!', 'Failed to get info about this user!', 'error')
+          if (isUpdated) this.$swal('Ouch!', 'Failed to get info about this user!', 'error')
         }
       } catch (err) {
         if (this.retries < 3) {
@@ -75,7 +74,7 @@ export default {
           console.error(err)
           this.err = true
           this.nf = false
-          if (isUpdated) swal('Ouch!', 'Failed to get info about this user!', 'error')
+          if (isUpdated) this.$swal('Ouch!', 'Failed to get info about this user!', 'error')
         }
       }
     }

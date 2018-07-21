@@ -115,7 +115,6 @@
 import auth from '../../auth'
 import { validationMixin } from 'vuelidate'
 import { required, url, between } from 'vuelidate/lib/validators'
-import swal from 'sweetalert2'
 
 export default {
   name: 'TaskEditor',
@@ -166,7 +165,7 @@ export default {
         } else {
           console.error(data)
           this.err = true
-          swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
+          this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
         }
       } catch (err) {
         if (this.retries < 3) {
@@ -176,7 +175,7 @@ export default {
         } else {
           console.error(err)
           this.err = true
-          swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
+          this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
         }
       }
     },
@@ -204,16 +203,16 @@ export default {
 
           if (data.code === 200) {
             Object.assign(this.tasks[this.editedIndex], this.editedItem)
-            swal('Good job!', `${this.editedItem.name} successfully edited`, 'success')
+            this.$swal('Good job!', `${this.editedItem.name} successfully edited`, 'success')
           } else {
             console.error(data)
             this.err = true
-            swal('Oops, there is a problem!', `Failed to edit ${this.editedItem.name}`, 'error')
+            this.$swal('Oops, there is a problem!', `Failed to edit ${this.editedItem.name}`, 'error')
           }
         } catch (err) {
           console.error(err)
           this.err = true
-          swal('Oops, there is a problem!', `Failed to edit ${this.editedItem.name}`, 'error')
+          this.$swal('Oops, there is a problem!', `Failed to edit ${this.editedItem.name}`, 'error')
         }
       } else {
         try {
@@ -222,16 +221,16 @@ export default {
           if (data.code === 201) {
             this.tasks.push(this.editedItem)
             let vm = this
-            setTimeout(() => swal('Good job!', `${vm.editedItem.name} successfully added`, 'success'), 200)
+            setTimeout(() => this.$swal('Good job!', `${vm.editedItem.name} successfully added`, 'success'), 200)
           } else {
             console.error(data)
             this.err = true
-            swal('Oh no, an error occured!', `Failed to add ${this.editedItem.name}`, 'error')
+            this.$swal('Oh no, an error occured!', `Failed to add ${this.editedItem.name}`, 'error')
           }
         } catch (err) {
           console.error(err)
           this.err = true
-          swal('Oh no, an error occured!', `Failed to add ${this.editedItem.name}`, 'error')
+          this.$swal('Oh no, an error occured!', `Failed to add ${this.editedItem.name}`, 'error')
         }
       }
       this.close()
