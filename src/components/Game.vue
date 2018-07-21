@@ -118,9 +118,9 @@ export default {
   mounted () {
     this.dark = localStorage.getItem('dark') === 'true'
 
-    let vm = this
+    const { refreshToken } = this
     this.$el.onclick = function () {
-      vm.refreshToken()
+      refreshToken()
     }
 
     if (localStorage.getItem('pushTokenSentToServer')) this.isSubscribed = true
@@ -141,24 +141,24 @@ export default {
       this.setTokenSentToServer(false)
     },
     subscribe () {
-      let vm = this
+      const { setTokenSentToServer, sendTokenToServer } = this
 
       messaging.requestPermission().then(function () {
         console.log('Notification permission granted.')
         messaging.getToken().then(async function (currentToken) {
           if (currentToken) {
-            await vm.sendTokenToServer(currentToken)
+            await sendTokenToServer(currentToken)
           } else {
             // Show permission request.
             console.log('No Instance ID token available. Request permission to generate one.')
             // Show permission UI.
             // updateUIForPushPermissionRequired()
-            vm.setTokenSentToServer(false)
+            setTokenSentToServer(false)
           }
         }).catch(function (err) {
           console.log('An error occurred while retrieving token. ', err)
           // showToken('Error retrieving Instance ID token. ', err)
-          vm.setTokenSentToServer(false)
+          setTokenSentToServer(false)
         })
 
         messaging.onTokenRefresh(function () {
@@ -166,9 +166,9 @@ export default {
             console.log('Token refreshed.')
             // Indicate that the new Instance ID token has not yet been sent to the
             // app server.
-            vm.setTokenSentToServer(false)
+            setTokenSentToServer(false)
             // Send Instance ID token to app server.
-            await vm.sendTokenToServer(refreshedToken)
+            await sendTokenToServer(refreshedToken)
             // ...
           }).catch(function (err) {
             console.log('Unable to retrieve refreshed token ', err)
@@ -201,10 +201,10 @@ export default {
     async refreshToken () {
       if (this.$getTokenExp() && this.$getToken()) {
         try {
-          let result = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
+          const { data } = await this.$http.post('/auth/refreshToken', { token: this.$getToken() })
 
-          if (result.data.code === 200) {
-            lscache.set('token', result.data.token, 60)
+          if (data.code === 200) {
+            lscache.set('token', data.token, 60)
             lscache.set('token-exp', 1, 55)
           }
         } catch (e) {

@@ -108,9 +108,9 @@ export default {
     async getSolved () {
       if (this.auth.$auth) {
         try {
-          let result = await this.$http.post('tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
+          const { data } = await this.$http.post('tasks/' + this.task.id + '/isSolved', { token: this.$getToken() })
 
-          if (result.data.code === 200 && result.data.solved) this.isSolved = true
+          if (data.code === 200 && data.solved) this.isSolved = true
         } catch (err) {
           if (this.retries < 3) {
             console.error(err)
@@ -129,10 +129,9 @@ export default {
       if (this.flagErrors.length !== 0) return
 
       try {
-        let result = await this.$http.post('tasks/' + this.task.id + '/solved', { token: this.$getToken(), flag: this.flag })
+        const { data } = await this.$http.post('tasks/' + this.task.id + '/solved', { token: this.$getToken(), flag: this.flag })
 
-        console.log(result)
-        if (result.data.code === 200) {
+        if (data.code === 200) {
           this.$v.$reset()
           this.flag = ''
           this.isSolved = true
@@ -141,9 +140,9 @@ export default {
           this.inc = false
           swal('Congratulations!', `You solved ${this.task.name}`, 'success')
         } else {
-          switch (result.data.code) {
+          switch (data.code) {
             case 404: {
-              console.error(result.data)
+              console.error(data)
               this.err = true
               this.inc = false
               break
@@ -155,7 +154,7 @@ export default {
               break
             }
             default: {
-              console.error(result.data)
+              console.error(data)
               this.err = true
               this.inc = false
               swal('Oops!', 'An error occured.', 'error')

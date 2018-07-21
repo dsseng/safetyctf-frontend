@@ -166,21 +166,21 @@ export default {
   },
   async created () {
     try {
-      let usersAndTasks = await this.$http.get('/stats/usersAndTasks')
+      const { data } = await this.$http.get('/stats/usersAndTasks')
 
-      if (usersAndTasks.data.code === 200) {
+      if (data.code === 200) {
         let vm = this
         anime({
           targets: vm,
-          usersTotal: usersAndTasks.data.usersCount,
-          tasksTotal: usersAndTasks.data.tasksCount,
+          usersTotal: data.usersCount,
+          tasksTotal: data.tasksCount,
           duration: 1000,
           easing: 'linear',
           round: 1
         })
         this.connErr = false
       } else {
-        console.log(usersAndTasks.data)
+        console.log(data)
         this.connErr = true
         swal('Ouch!', 'Failed to get statistics!', 'error')
       }

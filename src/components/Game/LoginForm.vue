@@ -94,10 +94,10 @@
         if (this.passwordErrors.length || this.emailErrors.length) return
 
         try {
-          let result = await this.$http.post('/auth/login', { username: this.email, password: this.password })
+          const { data } = await this.$http.post('/auth/login', { username: this.email, password: this.password })
 
-          if (result.data.code === 200) {
-            lscache.set('token', result.data.token, 60)
+          if (data.code === 200) {
+            lscache.set('token', data.token, 60)
             lscache.set('token-exp', 1, 55)
 
             this.$v.$reset()
@@ -107,18 +107,18 @@
             this.err = false
             this.invPass = false
             this.notFound = false
-          } else if (result.data.code === 401) {
+          } else if (data.code === 401) {
             this.invPass = true
             this.err = false
             this.notFound = false
             swal('Hmm...', 'I think, you forgot your password!', 'error')
-          } else if (result.data.code === 404) {
+          } else if (data.code === 404) {
             this.notFound = true
             this.err = false
             this.invPass = false
             swal('There is no such user!', 'This user does not exist!', 'error')
           } else {
-            console.error(result.data)
+            console.error(data)
             this.err = true
             this.invPass = false
             this.notFound = false

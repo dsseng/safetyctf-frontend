@@ -17,10 +17,10 @@ let interval = async () => {
 
   if (auth.$auth && !oldAuth) {
     try {
-      let result = await instance.post('/info/isAdmin', { token: lscache.get('token') })
+      const { data } = await instance.post('/info/isAdmin', { token: lscache.get('token') })
 
-      if (result.data.code === 200) {
-        auth.$isAdmin = result.data.admin
+      if (data.code === 200) {
+        auth.$isAdmin = data.admin
       } else {
         auth.$isAdmin = false
       }
@@ -29,10 +29,10 @@ let interval = async () => {
     }
 
     try {
-      let result = await instance.post('/info/getUsername', { token: lscache.get('token') })
+      const { data } = await instance.post('/info/getUsername', { token: lscache.get('token') })
 
-      if (result.data.code === 200) {
-        auth.$username = result.data.username
+      if (data.code === 200) {
+        auth.$username = data.username
       } else {
         auth.$username = undefined
       }

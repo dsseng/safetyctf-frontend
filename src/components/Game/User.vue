@@ -47,10 +47,10 @@ export default {
   methods: {
     async getAccount (isUpdated) {
       try {
-        let result = await this.$http.get('/info/' + this.username)
+        const { data } = await this.$http.get('/info/' + this.username)
 
-        if (result.data.code === 200) {
-          if (!result.data.user) {
+        if (data.code === 200) {
+          if (!data.user) {
             this.nf = true
             this.err = false
             if (isUpdated) swal('There is no such user!', 'This user does not exist!', 'error')
@@ -58,8 +58,8 @@ export default {
             this.nf = false
             this.err = false
 
-            this.user = result.data.user
-            this.tasksSolved = result.data.tasksSolved
+            this.user = data.user
+            this.tasksSolved = data.tasksSolved
           }
         } else {
           this.err = true

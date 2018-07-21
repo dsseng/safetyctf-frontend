@@ -70,9 +70,9 @@ export default {
   methods: {
     async getLeaderboard () {
       try {
-        let result = await this.$http.get('/stats/leaderboard')
+        const { data } = await this.$http.get('/stats/leaderboard')
 
-        if (result.data.code === 200) this.users = result.data.users
+        if (data.code === 200) this.users = data.users
       } catch (err) {
         if (this.retries < 3) {
           console.error(err)

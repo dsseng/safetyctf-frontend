@@ -116,9 +116,9 @@
         if (this.oldPasswordErrors.length || this.newPasswordErrors.length || this.newPasswordErrors.length) return
 
         try {
-          let result = await this.$http.post('/auth/changePassword', { token: this.$getToken(), oldPassword: this.oldPassword, newPassword: this.newPassword })
+          const { data } = await this.$http.post('/auth/changePassword', { token: this.$getToken(), oldPassword: this.oldPassword, newPassword: this.newPassword })
 
-          if (result.data.code === 200) {
+          if (data.code === 200) {
             this.$v.$reset()
             this.oldPassword = ''
             this.newPassword = ''
@@ -127,12 +127,12 @@
             this.err = false
             this.invPass = false
             swal('OK!', 'Password changed! Hooray!', 'success')
-          } else if (result.data.code === 401) {
+          } else if (data.code === 401) {
             this.invPass = true
             this.err = false
             swal('Oops!', 'Old password isn\'t correct!', 'warning')
           } else {
-            console.error(result.data)
+            console.error(data)
             this.err = true
             this.invPass = false
             swal('Oh no!', 'There is some error!', 'error')
