@@ -60,7 +60,9 @@
     </v-list>
   </v-navigation-drawer>
   <v-content>
-    <router-view></router-view>
+    <transition enter-active-class='animated bounceInLeft' leave-active-class='animated bounceOutRight' mode='out-in' duration='300'>
+      <router-view></router-view>
+    </transition>
   </v-content>
 </v-app>
 </template>
