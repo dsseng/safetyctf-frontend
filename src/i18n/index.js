@@ -1,18 +1,15 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import hello from './hello'
 
 Vue.use(VueI18n)
 
 const messages = {
   en: {
-    message: {
-      // Add some global translations
-    }
+    hello: hello.en
   },
   ru: {
-    message: {
-      // Add some global translations
-    }
+    hello: hello.ru
   }
 }
 

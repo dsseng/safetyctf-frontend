@@ -8,7 +8,7 @@
       </v-toolbar-items>
     </v-toolbar>
     <v-alert color="error" icon="signal_cellular_connected_no_internet_4_bar" :value="connErr" transition="scale-transition">
-      {{ $t('message.error') }}
+      {{ $t('hello.error') }}
     </v-alert>
     <v-parallax src="static/img/602727-background-city-1920x1200-windows-7.jpg" height="600">
       <transition
@@ -21,15 +21,15 @@
           justify-center
           class="yellow--text"
         >
-          <h1 class="yellow--text mb-2 display-1 text-xs-center">{{ $t('message.welcome') }}</h1>
-          <div class="subheading mb-3 text-xs-center">{{ $t('message.descr') }}</div>
+          <h1 class="yellow--text mb-2 display-1 text-xs-center">{{ $t('hello.welcome') }}</h1>
+          <div class="subheading mb-3 text-xs-center">{{ $t('hello.descr') }}</div>
           <v-btn
             class="blue lighten-2 mt-5 animated infinite tada"
             dark
             large
             to="/game/myaccount"
           >
-            {{ $t('message.getStarted') }}
+            {{ $t('hello.getStarted') }}
           </v-btn>
         </v-layout>
       </transition>
@@ -44,12 +44,12 @@
             <v-card-media src="static/img/148573-best-hacking-wallpaper-1920x1080.jpg" height="200px"></v-card-media>
             <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{ $t('message.manyPlayers') }}</h3>
-                <div>{{ $tc('message.users', usersTotal, { count: usersTotal }) }}</div>
+                <h3 class="headline mb-0">{{ $t('hello.manyPlayers') }}</h3>
+                <div>{{ $tc('hello.users', usersTotal, { count: usersTotal }) }}</div>
               </div>
             </v-card-title>
             <v-card-actions>
-              <v-btn flat color="orange" to="/game/myaccount">{{ $t('message.beOne') }}</v-btn>
+              <v-btn flat color="orange" to="/game/myaccount">{{ $t('hello.beOne') }}</v-btn>
             </v-card-actions>
           </v-card>
         </transition>
@@ -63,12 +63,12 @@
             <v-card-media src="static/img/80891-math-background-1920x1200-meizu.jpg" height="200px"></v-card-media>
             <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{ $t('message.manyTasks') }}</h3>
-                <div>{{ $tc('message.tasks', tasksTotal, { count: tasksTotal }) }}</div>
+                <h3 class="headline mb-0">{{ $t('hello.manyTasks') }}</h3>
+                <div>{{ $tc('hello.tasks', tasksTotal, { count: tasksTotal }) }}</div>
               </div>
             </v-card-title>
             <v-card-actions>
-              <v-btn flat color="green" to="/game/myaccount">{{ $t('message.solve') }}</v-btn>
+              <v-btn flat color="green" to="/game/myaccount">{{ $t('hello.solve') }}</v-btn>
             </v-card-actions>
           </v-card>
         </transition>
@@ -82,12 +82,12 @@
             <v-card-media src="static/img/677680-new-cool-math-backgrounds-1920x1080-high-resolution.jpg" height="200px"></v-card-media>
             <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{ $t('message.interesting') }}</h3>
-                <div>{{ $t('message.made') }}</div>
+                <h3 class="headline mb-0">{{ $t('hello.interesting') }}</h3>
+                <div>{{ $t('hello.made') }}</div>
               </div>
             </v-card-title>
             <v-card-actions>
-              <v-btn flat color="red" to="/game/myaccount">{{ $t('message.super') }}</v-btn>
+              <v-btn flat color="red" to="/game/myaccount">{{ $t('hello.super') }}</v-btn>
             </v-card-actions>
           </v-card>
         </transition>
@@ -96,16 +96,16 @@
     <section style='margin-top: 15px;'>
       <v-container>
         <p>
-          {{ $t('message.competition') }}
+          {{ $t('hello.competition') }}
         </p>
         <p>
-          {{ $t('message.if') }}
+          {{ $t('hello.if') }}
         </p>
       </v-container>
     </section>
     <section style='margin-top: 15px;'>
       <v-container>
-        <h1>{{ $t('message.leaderboard') }}</h1>
+        <h1>{{ $t('hello.leaderboard') }}</h1>
         <leaderboard></leaderboard>
       </v-container>
     </section>
@@ -122,50 +122,6 @@ import swal from 'sweetalert2'
 export default {
   name: 'hello',
   components: { LangSwitch, Logo, Leaderboard },
-  i18n: {
-    messages: {
-      en: {
-        message: {
-          error: 'It seems to be some connection problems',
-          welcome: '⚡️Welcome to SafetyCTF!👨‍💻👩‍💻',
-          getStarted: 'Get started!🎉',
-          descr: 'Hello, this is a competition in hacking and IT safety🔒🔓',
-          manyPlayers: 'Many👨‍💻players around the world',
-          interesting: 'Interesting tasks made by true hackers',
-          made: 'SafetyCTF\'s tasks are made by realy cool hackers!😎',
-          tasks: 'In total, SafetyCTF has {count} task | In total, SafetyCTF has {count} tasks',
-          users: 'In total, SafetyCTF has {count} user | In total, SafetyCTF has {count} users',
-          beOne: 'Get Started and be one of them!😎',
-          solve: 'Get Started and solve them!🔓',
-          super: 'Get Started and solve this super tasks!🔐',
-          competition: 'SafetyCTF is a competition in hacking‍ 💻 and IT safety 🔒🔓. CTF is "Capture The Flag". You need to solve tasks 📜 to get flags, codes starting with $ctf.',
-          if: 'If you have solved task, you will get money 💵 and experience ✨.',
-          manyTasks: 'Many📜tasks',
-          leaderboard: 'Leaderboard'
-        }
-      },
-      ru: {
-        message: {
-          error: 'Похоже, произошла ошибка соединения',
-          welcome: '⚡️Добро пожаловать в SafetyCTF!👨‍💻👩‍💻',
-          getStarted: 'Поехали!🎉',
-          descr: 'Привет, это соревнование по взлому и информационной безопасности🔒🔓',
-          manyPlayers: 'Большое количество👨‍💻игроков по всему миру',
-          interesting: 'Интересные задачи, созданные настоящими хакерами',
-          made: 'Задачи SafetyCTF созданы действительно крутыми хакерами!😎',
-          tasks: 'В SafetyCTF существует {count} задача | В SafetyCTF существует {count} задач',
-          users: 'В SafetyCTF зарегистрирован {count} пользователь | В SafetyCTF зарегистрировано {count} пользователей',
-          beOne: 'Участвуй и будь одним из них!😎',
-          solve: 'Участвуй и решай их!🔓',
-          super: 'Участвуй и решай эти классные испытания!🔐',
-          competition: 'SafetyCTF --  соревнование  по‍ взлому 💻 и информационной безопасности 🔒🔓. CTF -- "Capture The Flag". Чтобы получить флаги (коды, начинающиеся с $ctf), нужно решать задачи (таски) 📜',
-          if: 'Если вы решили задачу, вы получите деньги 💵 и опыт ✨.',
-          manyTasks: 'Много📜заданий',
-          leaderboard: 'Таблица лидеров'
-        }
-      }
-    }
-  },
   data () {
     return {
       tasksTotal: 0,
