@@ -93,7 +93,7 @@
         </transition>
       </v-flex>
     </v-layout>
-    <section class='white' style='margin-top: 15px;'>
+    <section style='margin-top: 15px;'>
       <v-container>
         <p>
           {{ $t('message.competition') }}
@@ -103,18 +103,25 @@
         </p>
       </v-container>
     </section>
+    <section style='margin-top: 15px;'>
+      <v-container>
+        <h1>{{ $t('message.leaderboard') }}</h1>
+        <leaderboard></leaderboard>
+      </v-container>
+    </section>
   </v-app>
 </template>
 
 <script>
 import anime from 'animejs'
 import LangSwitch from './Game/LangSwitch'
+import Leaderboard from './Game/Leaderboard'
 import Logo from './Logo'
 import swal from 'sweetalert2'
 
 export default {
   name: 'hello',
-  components: { LangSwitch, Logo },
+  components: { LangSwitch, Logo, Leaderboard },
   i18n: {
     messages: {
       en: {
@@ -133,7 +140,8 @@ export default {
           super: 'Get Started and solve this super tasks!🔐',
           competition: 'SafetyCTF is a competition in hacking‍ 💻 and IT safety 🔒🔓. CTF is "Capture The Flag". You need to solve tasks 📜 to get flags, codes starting with $ctf.',
           if: 'If you have solved task, you will get money 💵 and experience ✨.',
-          manyTasks: 'Many📜tasks'
+          manyTasks: 'Many📜tasks',
+          leaderboard: 'Leaderboard'
         }
       },
       ru: {
@@ -152,7 +160,8 @@ export default {
           super: 'Участвуй и решай эти классные испытания!🔐',
           competition: 'SafetyCTF --  соревнование  по‍ взлому 💻 и информационной безопасности 🔒🔓. CTF -- "Capture The Flag". Чтобы получить флаги (коды, начинающиеся с $ctf), нужно решать задачи (таски) 📜',
           if: 'Если вы решили задачу, вы получите деньги 💵 и опыт ✨.',
-          manyTasks: 'Много📜заданий'
+          manyTasks: 'Много📜заданий',
+          leaderboard: 'Таблица лидеров'
         }
       }
     }
