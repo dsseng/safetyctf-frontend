@@ -22,6 +22,7 @@
         @input="$v.email.$touch()"
         @blur="$v.email.$touch()"
         required
+        @keypress='loginKeypress'
       ></v-text-field>
     </v-layout>
 
@@ -37,6 +38,8 @@
         :append-icon="e1 ? 'visibility' : 'visibility_off'"
         :append-icon-cb="() => (e1 = !e1)"
         :type="e1 ? 'password' : 'text'"
+        @keypress='passwordKeypress'
+        ref='pass'
       ></v-text-field>
     </v-layout>
 
@@ -87,6 +90,16 @@
     },
 
     methods: {
+      loginKeypress (e) {
+        if (e && e.keyCode === 13) {
+          this.$refs.pass.focus()
+        }
+      },
+      passwordKeypress (e) {
+        if (e && e.keyCode === 13) {
+          this.submit()
+        }
+      },
       async submit () {
         this.$v.$touch()
 
