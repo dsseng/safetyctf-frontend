@@ -11,7 +11,7 @@
   <p v-if="user.role === 'admin'">🌟 Admin</p>
   <p><v-icon>money</v-icon> {{ user.money }}$</p>
   <p><v-icon>star</v-icon> {{ user.experience }}</p>
-  <p><v-icon>how_to_reg</v-icon> {{ user.registerDate.replace('T', ' ').replace('Z', '') }}</p>
+  <p><v-icon>how_to_reg</v-icon> {{ user.registerDate | datetime }}</p>
   <p><v-icon>cake</v-icon> {{ user.dob }}</p>
   <p>
     Friends:
@@ -31,6 +31,11 @@ import Task from './Task'
 
 export default {
   components: { Task },
+  filters: {
+    datetime: x => {
+      return x.substring(0, x.indexOf('.')).replace('T', ' ').replace('Z', '').replace('-', '.').replace('-', '.')
+    }
+  },
   data () {
     return {
       user: {},
