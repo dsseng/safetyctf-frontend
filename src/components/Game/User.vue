@@ -12,7 +12,7 @@
   <p><v-icon>money</v-icon> {{ user.money }}$</p>
   <p><v-icon>star</v-icon> {{ user.experience }}</p>
   <p><v-icon>how_to_reg</v-icon> {{ user.registerDate | datetime }}</p>
-  <p><v-icon>cake</v-icon> {{ user.dob }}</p>
+  <p><v-icon>cake</v-icon> {{ user.dob.replace('-', '.').replace('-', '.') }}</p>
   <p>
     Friends:
     <ul style='list-style: none'>
