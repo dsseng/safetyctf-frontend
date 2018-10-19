@@ -19,7 +19,7 @@
         @blur="$v.oldPassword.$touch()"
         required
         :append-icon="e1 ? 'visibility' : 'visibility_off'"
-        :append-icon-cb="() => (e1 = !e1)"
+        @click:append="() => (e1 = !e1)"
         :type="e1 ? 'password' : 'text'"
       ></v-text-field>
     </v-layout>
@@ -34,7 +34,7 @@
         @blur="$v.newPassword.$touch()"
         required
         :append-icon="e2 ? 'visibility' : 'visibility_off'"
-        :append-icon-cb="() => (e2 = !e2)"
+        @click:append="() => (e2 = !e2)"
         :type="e2 ? 'password' : 'text'"
       ></v-text-field>
     </v-layout>
@@ -49,7 +49,7 @@
         @blur="$v.confirmPassword.$touch()"
         required
         :append-icon="e2 ? 'visibility' : 'visibility_off'"
-        :append-icon-cb="() => (e2 = !e2)"
+        @click:append="() => (e2 = !e2)"
         :type="e2 ? 'password' : 'text'"
       ></v-text-field>
     </v-layout>
