@@ -19,7 +19,7 @@ Vue.use(VueClipboard)
 Vue.use(Vuetify)
 
 let instance = axios.create({
-  baseURL: '/api'
+  baseURL: 'https://safetyctf.ddns.net/api/'
 })
 axiosRetry(instance, { retries: 3 })
 // before a request is made start the nprogress

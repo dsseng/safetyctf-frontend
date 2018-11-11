@@ -3,7 +3,7 @@ import lscache from 'lscache'
 import axiosRetry from 'axios-retry'
 
 let instance = axios.create({
-  baseURL: '/api'
+  baseURL: 'https://safetyctf.ddns.net/api/'
 })
 axiosRetry(instance, { retries: 3 })
 
