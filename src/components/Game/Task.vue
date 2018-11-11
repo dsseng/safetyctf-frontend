@@ -86,8 +86,7 @@ export default {
       inc: false,
       err: false,
       isSolved: false,
-      auth,
-      retries: 0
+      auth
     }
   },
   props: [ 'task' ],
@@ -111,14 +110,8 @@ export default {
 
           if (data.code === 200 && data.solved) this.isSolved = true
         } catch (err) {
-          if (this.retries < 3) {
-            console.error(err)
-            this.getSolved()
-            this.retries++
-          } else {
-            console.error(err)
-            this.err = true
-          }
+          console.error(err)
+          this.err = true
         }
       }
     },
