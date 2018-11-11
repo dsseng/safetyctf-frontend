@@ -61,8 +61,7 @@ export default {
   data: () => ({
     pagination: { sortBy: 'experience', descending: true },
     users: [],
-    err: false,
-    retries: 0
+    err: false
   }),
   created () {
     this.getLeaderboard()
@@ -74,14 +73,8 @@ export default {
 
         if (data.code === 200) this.users = data.users
       } catch (err) {
-        if (this.retries < 3) {
-          console.error(err)
-          this.getLeaderboard()
-          this.retries++
-        } else {
-          console.error(err)
-          this.err = true
-        }
+        console.error(err)
+        this.err = true
       }
     }
   }

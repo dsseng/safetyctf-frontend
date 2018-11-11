@@ -71,22 +71,15 @@ export default {
           if (isUpdated) this.$swal('Ouch!', 'Failed to get info about this user!', 'error')
         }
       } catch (err) {
-        if (this.retries < 3) {
-          console.error(err)
-          this.getAccount()
-          this.retries++
-        } else {
-          console.error(err)
-          this.err = true
-          this.nf = false
-          if (isUpdated) this.$swal('Ouch!', 'Failed to get info about this user!', 'error')
-        }
+        console.error(err)
+        this.err = true
+        this.nf = false
+        if (isUpdated) this.$swal('Ouch!', 'Failed to get info about this user!', 'error')
       }
     }
   },
   watch: {
     username () {
-      this.retries = 0
       this.getAccount(true)
     }
   }

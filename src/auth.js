@@ -1,9 +1,12 @@
 import axios from 'axios'
 import lscache from 'lscache'
+import axiosRetry from 'axios-retry'
 
 let instance = axios.create({
   baseURL: '/api'
 })
+axiosRetry(instance, { retries: 3 })
+
 let auth = {
   $auth: false,
   $isAdmin: false,

@@ -53,8 +53,7 @@ export default {
     return {
       tasks: [],
       err: false,
-      sortingBy: 'Experience',
-      retries: 0
+      sortingBy: 'Experience'
     }
   },
   methods: {
@@ -70,15 +69,9 @@ export default {
           this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
         }
       } catch (err) {
-        if (this.retries < 3) {
-          console.error(err)
-          this.getTasks()
-          this.retries++
-        } else {
-          console.error(err)
-          this.err = true
-          this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
-        }
+        console.error(err)
+        this.err = true
+        this.$swal('Oops, there is a problem!', 'Failed to get tasks\' list', 'error')
       }
     }
   },
