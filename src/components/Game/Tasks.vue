@@ -65,12 +65,12 @@ export default {
   methods: {
     async getTasks() {
       try {
-        const result = await this.$http.get("/tasks/");
+        const { data } = await this.$http.get("/tasks/");
 
-        if (result.data.code === 200) {
-          this.tasks = result.data.tasks;
+        if (data.code === 200) {
+          this.tasks = data.tasks;
         } else {
-          console.error(result.data);
+          console.error(data);
           this.err = true;
           this.$swal(
             "Oops, there is a problem!",
