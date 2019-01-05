@@ -4,40 +4,40 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      lang: 'English'
-    }
+      lang: "English"
+    };
   },
   methods: {
-    switchLang () {
+    switchLang() {
       switch (this.lang) {
-        case 'English': {
-          this.lang = 'Русский'
-          this.$i18n.locale = 'ru'
-          break
+        case "English": {
+          this.lang = "Русский";
+          this.$i18n.locale = "ru";
+          break;
         }
 
-        case 'Русский': {
-          this.lang = 'English'
-          this.$i18n.locale = 'en'
-          break
+        case "Русский": {
+          this.lang = "English";
+          this.$i18n.locale = "en";
+          break;
         }
       }
-      localStorage.setItem('lang', this.lang) // Save to localStorage
+      localStorage.setItem("lang", this.lang); // Save to localStorage
     }
   },
-  created () {
-    if (localStorage.getItem('lang')) {
-      this.lang = localStorage.getItem('lang')
+  created() {
+    if (localStorage.getItem("lang")) {
+      this.lang = localStorage.getItem("lang");
     } else {
-      this.lang = 'English' // English is default language
-      this.$i18n.locale = 'en'
+      this.lang = "English"; // English is default language
+      this.$i18n.locale = "en";
     }
 
-    if (this.lang === 'Русский') {
-      this.$i18n.locale = 'ru'
+    if (this.lang === "Русский") {
+      this.$i18n.locale = "ru";
     }
   }
-}
+};
 </script>

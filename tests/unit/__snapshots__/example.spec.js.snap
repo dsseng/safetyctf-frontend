@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo.vue renders correctly 1`] = `undefined`;
+
+exports[`Logo.vue renders correctly if is vertical 1`] = `undefined`;
+
+exports[`Logo.vue renders correctly with custom width and height 1`] = `undefined`;

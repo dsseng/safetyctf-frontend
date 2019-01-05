@@ -1,49 +1,53 @@
-import axios from 'axios'
-import lscache from 'lscache'
+import axios from "axios";
+import lscache from "lscache";
 
-let instance = axios.create({
-  baseURL: '/api'
-})
+const instance = axios.create({
+  baseURL: "/api/"
+});
 let auth = {
   $auth: false,
   $isAdmin: false,
   $username: undefined
-}
-let oldAuth = false
+};
+let oldAuth = false;
 
-let interval = async () => {
-  lscache.flushExpired()
-  auth.$auth = lscache.get('token') != null
+const interval = async () => {
+  lscache.flushExpired();
+  auth.$auth = lscache.get("token") != null;
 
   if (auth.$auth && !oldAuth) {
     try {
-      const { data } = await instance.post('/info/isAdmin', { token: lscache.get('token') })
+      const { data } = await instance.post("/info/isAdmin", {
+        token: lscache.get("token")
+      });
 
       if (data.code === 200) {
-        auth.$isAdmin = data.admin
+        auth.$isAdmin = data.admin;
       } else {
-        auth.$isAdmin = false
+        auth.$isAdmin = false;
       }
     } catch (err) {
-      auth.$isAdmin = false
+      auth.$isAdmin = false;
     }
 
     try {
-      const { data } = await instance.post('/info/getUsername', { token: lscache.get('token') })
+      const { data } = await instance.post("/info/getUsername", {
+        token: lscache.get("token")
+      });
 
       if (data.code === 200) {
-        auth.$username = data.username
+        auth.$username = data.username;
       } else {
-        auth.$username = undefined
+        auth.$username = undefined;
       }
     } catch (err) {
-      auth.$username = undefined
+      auth.$username = undefined;
     }
   }
 
-  oldAuth = auth.$auth
-}
+  oldAuth = auth.$auth;
+};
 
-setInterval(interval, 100)
+setInterval(interval, 100);
 
-export default auth
+export default auth;
