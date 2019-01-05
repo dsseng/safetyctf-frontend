@@ -87,7 +87,6 @@
 </template>
 
 <script>
-/* eslint-disable no-console */
 import { validationMixin } from "vuelidate";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 

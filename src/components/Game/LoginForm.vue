@@ -67,7 +67,6 @@
 </template>
 
 <script>
-/* eslint-disable no-console */
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
 import lscache from "lscache";

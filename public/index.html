@@ -3,39 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>safetyctf</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
-    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
-    <!-- Add to home screen for Android and modern mobile browsers -->
-    <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
-    <meta name="theme-color" content="#4DBA87">
-
-    <!-- Add to home screen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="safetyctf">
-    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png">
-    <link rel="mask-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/safari-pinned-tab.svg" color="#4DBA87">
-    <!-- Add to home screen for Windows -->
-    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#000000">
-    <% for (var chunk of webpack.chunks) {
-        for (var file of chunk.files) {
-          if (file.match(/\.(js|css)$/)) { %>
-    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>safetyctf-frontend</title>
+  </head>
+  <body>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
     <script>
       WebFont.load({
         google: {
-          families: ['Roboto', 'Material Icons', 'Righteous']
+          families: ['Righteous']
         }
       });
     </script>
-  </head>
-  <body>
+    <noscript>
+      <strong>We're sorry but safetyctf-frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
     <div id="app">
       <!-- https://codepen.io/tashfene/pen/raEqrJ -->
       <div class="centerer">
@@ -47,7 +30,6 @@
           padding: 0;
           background-color: #22baa0;
         }
-
         .centerer {
           width: 100vw;
           height: 100vh;
@@ -61,7 +43,6 @@
           -ms-flex-align: center;
           align-items: center;
         }
-
         .loader {
           display: block;
           width: 60px;
@@ -71,7 +52,6 @@
           -webkit-animation: loader 2s infinite ease;
           animation: loader 2s infinite ease;
         }
-
         .loader-inner {
           vertical-align: top;
           display: inline-block;
@@ -80,108 +60,86 @@
           -webkit-animation: loader-inner 2s infinite ease-in;
           animation: loader-inner 2s infinite ease-in;
         }
-
         @-webkit-keyframes loader {
           0% {
             -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
           }
-
           25% {
             -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
           }
-
           50% {
             -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
           }
-
           75% {
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
           }
-
           100% {
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
           }
         }
-
         @keyframes loader {
           0% {
             -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
           }
-
           25% {
             -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
           }
-
           50% {
             -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
           }
-
           75% {
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
           }
-
           100% {
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
           }
         }
-
         @-webkit-keyframes loader-inner {
           0% {
             height: 0%;
           }
-
           25% {
             height: 0%;
           }
-
           50% {
             height: 100%;
           }
-
           75% {
             height: 100%;
           }
-
           100% {
             height: 0%;
           }
         }
-
         @keyframes loader-inner {
           0% {
             height: 0%;
           }
-
           25% {
             height: 0%;
           }
-
           50% {
             height: 100%;
           }
-
           75% {
             height: 100%;
           }
-
           100% {
             height: 0%;
           }
         }
       </style>
     </div>
-    <!-- Todo: only include in production -->
-    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->
   </body>
 </html>
