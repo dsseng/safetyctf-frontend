@@ -13,7 +13,7 @@ import Leaderboard from "./components/Game/Leaderboard";
 
 Vue.use(Router);
 
-let router = new Router({
+const router = new Router({
   mode: "history",
   fallback: true,
   base: process.env.BASE_URL,

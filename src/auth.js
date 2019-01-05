@@ -1,7 +1,7 @@
 import axios from "axios";
 import lscache from "lscache";
 
-let instance = axios.create({
+const instance = axios.create({
   baseURL: "/api/"
 });
 let auth = {

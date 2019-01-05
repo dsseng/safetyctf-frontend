@@ -65,7 +65,7 @@ export default {
   methods: {
     async getTasks() {
       try {
-        let result = await this.$http.get("/tasks/");
+        const result = await this.$http.get("/tasks/");
 
         if (result.data.code === 200) {
           this.tasks = result.data.tasks;
@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     sortedTasks() {
-      let items = this.tasks;
+      const items = this.tasks;
       let i = 0;
       let j = 0;
 

@@ -18,7 +18,7 @@ import "./registerServiceWorker";
 
 Vue.use(VueClipboard);
 
-let instance = axios.create({
+const instance = axios.create({
   baseURL: "/api/"
 });
 // before a request is made start the nprogress

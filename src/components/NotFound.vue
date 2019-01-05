@@ -25,7 +25,7 @@ import Typed from "typed.js";
 
 export default {
   async mounted() {
-    var ip = (await this.$http.get("//icanhazip.com/")).data;
+    let ip = (await this.$http.get("//icanhazip.com/")).data;
     ip = ip.substring(0, ip.length - 1); // Remove \n
 
     /* eslint-disable no-new */
